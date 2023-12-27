@@ -46,7 +46,7 @@ function init() {
   let angle = Math.acos(-1 / Math.sqrt(3));
   cubeGroup.rotateOnAxis(axis, angle);
 
-  // animate();
+  animate();
 }
 
 function animate() {
