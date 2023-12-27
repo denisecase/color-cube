@@ -4,6 +4,7 @@ let scene, camera, renderer, cubeGroup;
 let cubeSize = 1;
 let gap = 0.2;
 let currentRotation = 0;
+let doAnimate = false;
 
 function init() {
   // Create scene
@@ -41,28 +42,34 @@ function init() {
   }
   scene.add(cubeGroup);
 
+  // ALIGN *******************************
+
   // Align the black cube (-1, -1, -1) with the negative Y-axis
   let axis = new THREE.Vector3(1, 0, -1).normalize();
   let angle = Math.acos(-1 / Math.sqrt(3));
   cubeGroup.rotateOnAxis(axis, angle);
 
-  // animate();
+  // END ALIGN ***************************
+
+  render();
 }
 
 function animate() {
-    requestAnimationFrame(animate);
-  
-    // Rotate the cube group slowly around the Y-axis
-    cubeGroup.rotation.y += 0.006;
-  
-    // add a controlled rotation to showcase different angles
-    if (currentRotation < Math.PI * 2) {
-      cubeGroup.rotation.x += 0.006;
-      currentRotation += 0.006;
-    }
-  
-    renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+  // ANIMATE *****************************
+
+  // Rotate the cube group slowly around the Y-axis
+  cubeGroup.rotation.y += 0.006;
+
+  // add a controlled rotation to showcase different angles
+  if (currentRotation < Math.PI * 2) {
+    cubeGroup.rotation.x += 0.006;
+    currentRotation += 0.006;
   }
+
+  // END ANIMATE **************************
+  renderer.render(scene, camera);
+}
 
 // Handle window resize
 window.addEventListener("resize", onWindowResize, false);
@@ -72,5 +79,14 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+function render() {
+  if (doAnimate) {
+    animate();
+  } else {
+    renderer.render(scene, camera);
+  }
+}
+
 
 init();
