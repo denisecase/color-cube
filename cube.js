@@ -2,7 +2,7 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
 let scene, camera, renderer, cubeGroup;
 let cubeSize = 1;
-let gap = 0.2;
+let gap = 0.4;
 let currentRotation = 0;
 let doAnimate = false;
 
