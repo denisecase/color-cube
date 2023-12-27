@@ -1,2 +1,30 @@
-body { margin: 0; }
-canvas { display: block; }
+body {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+/* Sticky footer styles */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer img {
+  width: 20px; 
+  vertical-align: middle;
+  margin-right: 5px;
+}
