@@ -4,7 +4,7 @@ let scene, camera, renderer, cubeGroup;
 let cubeSize = 1;
 let gap = 0.4;
 let currentRotation = 0;
-let doAnimate = false;
+let doAnimate = true;
 
 function init() {
   // Create scene
