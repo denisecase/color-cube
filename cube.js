@@ -45,10 +45,14 @@ function init() {
   // ALIGN *******************************
 
   // Align the black cube (-1, -1, -1) with the negative Y-axis
-  let axis = new THREE.Vector3(1, 0, -1).normalize();
-  let angle = Math.acos(-1 / Math.sqrt(3));
-  cubeGroup.rotateOnAxis(axis, angle);
+//  let axis = new THREE.Vector3(1, 0, -1).normalize();
+//  let angle = Math.acos(-1 / Math.sqrt(3));
+//  cubeGroup.rotateOnAxis(axis, angle);
 
+  let axis = new THREE.Vector3(-1, 1, 1).normalize();
+  let angle = 0;
+  cubeGroup.rotateOnAxis(axis, angle);
+  
   // END ALIGN ***************************
 
   render();
