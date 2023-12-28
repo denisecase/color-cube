@@ -50,7 +50,7 @@ function init() {
 //  cubeGroup.rotateOnAxis(axis, angle);
 
   let axis = new THREE.Vector3(1, 0, -1).normalize();
-  let angle = 3*(2*Math.PI/6);
+  let angle = 5*(2*Math.PI/6);
   cubeGroup.rotateOnAxis(axis, angle);  
   // END ALIGN ***************************
 
