@@ -1,9 +1,22 @@
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+#canvas-container {
+  flex-grow: 1; /* Allow the container to grow and push the footer down */
+  display: flex;
+  justify-content: center; /* Center canvas horizontally */
+  align-items: center; /* Center canvas vertically */
+  height: 90vh; /* 90% viewport height */
+  margin-top: 10px;
 }
 
 canvas {
-  display: block;
+  max-width: 100%; 
+  max-height: 100%; 
 }
 
 /* Sticky footer styles */
@@ -29,6 +42,9 @@ canvas {
   margin-right: 5px;
 }
 
+/* Styles for Animation Controls */
+
+
 .animation-controls {
   text-align: center;
   padding: 20px 0;
@@ -43,4 +59,42 @@ canvas {
 
 .animation-controls input[type="checkbox"] {
   margin-right: 8px;
+}
+
+/* Styles for Gap Controls */
+.gap-controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  background-color: #555;
+  color: white;
+}
+
+.gap-controls .gap-min-controls,
+.gap-controls .gap-max-controls {
+  flex: 1;
+  text-align: center;
+}
+
+.gap-controls label {
+  display: block;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.gap-controls input[type="range"] {
+  width: 80%;
+  margin: 10px auto;
+  display: block;
+}
+
+.gap-controls output {
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.gap-controls input[type="number"] {
+  width: 60px;
+  margin: 0 auto;
+  display: block;
 }

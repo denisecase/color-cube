@@ -65,8 +65,11 @@ function init() {
   // Create renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
+  
+  // Append renderer to the canvas container
+  const canvasContainer = document.getElementById('canvas-container');
+  canvasContainer.appendChild(renderer.domElement);
+  
   // Create group for all small cubes
   cubeGroup = new THREE.Group();
 
@@ -149,6 +152,68 @@ document.getElementById('rotationAnimationCheckbox').addEventListener('change', 
     doAnimate = false;
   }
 });
+
+document.getElementById('gapMinSlider').addEventListener('input', (event) => {
+  let newMinValue = parseFloat(event.target.value);
+  let currentMaxValue = parseFloat(document.getElementById('gapMaxSlider').value);
+
+  // Ensure min is not greater than max
+  if (newMinValue > currentMaxValue) {
+    newMinValue = currentMaxValue;
+    event.target.value = newMinValue;
+  }
+
+  document.getElementById('gapMinNumber').value = newMinValue;
+  document.getElementById('gapMinOutput').textContent = newMinValue;
+  gapMin = newMinValue; // Update global variable
+});
+
+document.getElementById('gapMinNumber').addEventListener('input', (event) => {
+  let newMinValue = parseFloat(event.target.value);
+  let currentMaxValue = parseFloat(document.getElementById('gapMaxSlider').value);
+
+  // Ensure min is not greater than max
+  if (newMinValue > currentMaxValue) {
+    newMinValue = currentMaxValue;
+    event.target.value = newMinValue;
+  }
+
+  document.getElementById('gapMinSlider').value = newMinValue;
+  document.getElementById('gapMinOutput').textContent = newMinValue;
+  gapMin = newMinValue; // Update global variable
+});
+
+document.getElementById('gapMaxSlider').addEventListener('input', (event) => {
+  let newMaxValue = parseFloat(event.target.value);
+  let currentMinValue = parseFloat(document.getElementById('gapMinSlider').value);
+
+  // Ensure max is not less than min
+  if (newMaxValue < currentMinValue) {
+    newMaxValue = currentMinValue;
+    event.target.value = newMaxValue;
+  }
+
+  document.getElementById('gapMaxNumber').value = newMaxValue;
+  document.getElementById('gapMaxOutput').textContent = newMaxValue;
+  gapMax = newMaxValue; // Update global variable
+});
+
+document.getElementById('gapMaxNumber').addEventListener('input', (event) => {
+  let newMaxValue = parseFloat(event.target.value);
+  let currentMinValue = parseFloat(document.getElementById('gapMinSlider').value);
+
+  // Ensure max is not less than min
+  if (newMaxValue < currentMinValue) {
+    newMaxValue = currentMinValue;
+    event.target.value = newMaxValue;
+  }
+
+  document.getElementById('gapMaxSlider').value = newMaxValue;
+  document.getElementById('gapMaxOutput').textContent = newMaxValue;
+  gapMax = newMaxValue; // Update global variable
+});
+
+
 
 
 // Handle window resize
