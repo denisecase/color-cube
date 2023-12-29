@@ -129,6 +129,27 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+// Add event listeners for the checkboxes
+document.getElementById('gapAnimationCheckbox').addEventListener('change', (event) => {
+  doAnimateGap = event.target.checked;
+  if (doAnimateGap || doAnimateRotation) {
+    doAnimate = true;
+    animate();
+  } else {
+    doAnimate = false;
+  }
+});
+
+document.getElementById('rotationAnimationCheckbox').addEventListener('change', (event) => {
+  doAnimateRotation = event.target.checked;
+  if (doAnimateGap || doAnimateRotation) {
+    doAnimate = true;
+    animate();
+  } else {
+    doAnimate = false;
+  }
+});
+
 
 // Handle window resize
 window.addEventListener("resize", onWindowResize, false);
