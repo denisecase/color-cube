@@ -1,3 +1,17 @@
+// After Making Changes
+// Copy this URL to clipboard: https://github.com/denisecase/color-cube
+// Open Safari. 
+// Put cursor in very top address locaton.
+// Paste in the URL.
+// In the GitHub repo, click on cube.js to select it for editing.
+// From your machine, use COMMAND A to select all of this file.
+// Right-click "Copy".
+// Back in GitHub cube.js, click pencil to "Edit in Place"
+// In GitHub cube.js, use COMMAND A to select all the file contents.
+// Right-click "Paste".
+// Click green buttons to commit and push. Change message as desired.
+
+
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
 let scene, camera, renderer, cubeGroup;
