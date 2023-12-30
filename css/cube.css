@@ -1,17 +1,48 @@
+/* Example of a Media Query for smaller screens */
+@media screen and (max-width: 100px) {
+  .gap-control-row,
+  .rotation-control-row {
+    flex-direction: column;
+  }
+  .gap-control-row label,
+  .rotation-control-row label {
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
 body {
   margin: 0;
   display: flex;
   flex-direction: column;
   height: 100vh; /* Full viewport height */
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  display: flex;
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  padding: 10px;
+}
+
+header h1 {
+  text-align: center; /* Keeps text centered */
+  margin-left: 10px; /* space between image and h1 text */
+}
+
+#header-logo {
+  height: 100px;
+  width: auto; /* Maintain aspect ratio */
 }
 
 #canvas-container {
-  flex-grow: 1; /* Allow the container to grow and push the footer down */
+  flex-grow: 1; /* Allow container to grow and push the footer down */
   display: flex;
   justify-content: center; /* Center canvas horizontally */
   align-items: center; /* Center canvas vertically */
-  height: 90vh; /* 90% viewport height */
-  margin-top: 10px;
 }
 
 canvas {
@@ -19,25 +50,41 @@ canvas {
   max-height: 100%;
 }
 
-/* Sticky footer styles */
-.footer {
-  position: fixed;
+/* Sticky footer styles - always visible */
+
+footer {
+  display: flex;
+  flex-wrap: wrap; /* wrap onto the next line if needed */
+  justify-content: space-evenly;
+  align-items: center; /* Align items vertically */
+  padding: 10px 20px;
+  position: fixed; /* Stick to the bottom of the viewport */
   bottom: 0;
-  left: 0;
+  left: 0; 
   width: 100%;
   background-color: #333;
   color: #fff;
-  padding: 10px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
-.footer a {
+footer section,
+footer a {
+  display: flex;
+  align-items: center; /* Align items vertically inside each link */
+  margin: 0; /* Remove default margin */
+  flex: 1; /* each item can grow and take available space */
+  min-width: 50%; /* Minimum width for each item before wrapping */
+  justify-content: center; /* Center content within each flex item */
+}
+
+footer a {
   color: #fff;
   text-decoration: none;
 }
 
-.footer img {
-  width: 20px;
+footer img {
+  height: 30px;
   vertical-align: middle;
   margin-right: 5px;
 }
@@ -61,39 +108,66 @@ canvas {
 }
 
 /* Styles for Gap Controls */
-.gap-controls {
+
+.gap-control-row {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
+  align-items: center; /* Aligns items vertically */
+  justify-content: center; /* Centers items horizontally */
   padding: 20px 0;
   background-color: #555;
   color: white;
-}
-
-.gap-controls .gap-min-controls,
-.gap-controls .gap-max-controls {
-  flex: 1;
   text-align: center;
 }
 
-.gap-controls label {
-  display: block;
-  margin: 0 auto;
-  font-size: 16px;
+.gap-control-row > span {
+  margin: 0 5px; /* Space around the 'Gap:' label and 'to' */
 }
 
-.gap-controls input[type="range"] {
-  width: 80%;
-  margin: 10px auto;
-  display: block;
+.slider-container {
+  display: flex;
+  align-items: center; /* Align slider and text vertically */
+  flex-wrap: wrap; /* Allow sliders to wrap onto the next line if needed */
+  margin: 0 10px; /* Space around the slider container */
 }
 
-.gap-controls output {
-  display: block;
-  margin: 0 auto 10px auto;
+.slider-container input[type="range"] {
+  margin: 0 10px; /* Space around each slider */
 }
 
-.gap-controls input[type="number"] {
-  width: 60px;
-  margin: 0 auto;
-  display: block;
+/* Styles for Rotation Control */
+
+.rotation-control-row {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
+  justify-content: space-around; /* Distributes space evenly */
+  padding: 10px 0;
+  background-color: #666;
+  color: white;
+}
+
+.rotation-control-row .rotation-control {
+  display: flex; /* Enables Flexbox for the control */
+  align-items: center; /* Aligns items vertically */
+  flex: 1; /* Allows each control to grow and take available space */
+  margin: 5px; /* Adds a small margin around each control */
+  justify-content: center; /* Center content within each control */
+}
+
+.rotation-control-row label {
+  display: flex; /* Flex layout for label contents */
+  align-items: center; /* Aligns label text and input/slider/output */
+  margin-right: 10px; /* Space between label and the next item */
+}
+
+.rotation-control-row input[type="range"] {
+  margin: 0 10px; /* Space around the slider */
+}
+
+.rotation-control-row output {
+  margin-left: 10px; /* Space between slider and output */
+}
+input[type="range"],
+input[type="checkbox"] {
+  cursor: pointer; /* Indicates interactivity */
 }
