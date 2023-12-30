@@ -4,8 +4,8 @@ let scene, camera, renderer, cubeGroup;
 let cubeSize = 1;
 let currentRotation = 0;
 let doAnimate = true;
-let doAnimateGap = true;
-let doAnimateRotation = true;
+let doAnimateGap = false;
+let doAnimateRotation = false;
 let gap = 0.4;
 let gapChangeDirection = 1;
 const gapMax = 1.0;
@@ -32,7 +32,8 @@ function animateRotation() {
     // Rotate the cube group around its vertical axis
     // Adjust the rotation speed as needed
     let rotationSpeed = 0.01;
-    cubeGroup.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), rotationSpeed);
+   // cubeGroup.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), rotationSpeed);
+    cubeGroup.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), rotationSpeed);
 
     // Rotate the cube group slowly around the Y-axis
     //cubeGroup.rotation.y += 0.006;
@@ -59,7 +60,8 @@ function init() {
 
   // Create camera
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(-15, 10, 15);
+  //camera.position.set(-15, 10, 15);
+  camera.position.set(0, -10, 0);
   camera.lookAt(scene.position);
 
   // Create renderer
@@ -89,9 +91,9 @@ function createCubes() {
     for (let y = -1; y <= 1; y++) {
       for (let z = -1; z <= 1; z++) {
         const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-        const r = Math.floor((x + 1) * 127);
-        const g = Math.floor((y + 1) * 127);
-        const b = Math.floor((z + 1) * 127);
+        const r = Math.floor((x + 1) * 120);
+        const g = Math.floor((y + 1) * 120);
+        const b = Math.floor((z + 1) * 120);
         const color = new THREE.Color(`rgb(${r}, ${g}, ${b})`);
         const material = new THREE.MeshBasicMaterial({ color: color });
         const cube = new THREE.Mesh(geometry, material);
@@ -113,8 +115,11 @@ function positionCubes(gap) {
 }
 
 function alignCubeGroup() {
-  let axis = new THREE.Vector3(1, 0, -1).normalize();
-  let angle = (5 * Math.acos(-1 / Math.sqrt(3))) / 2;
+  // make white the north pole
+ // let axis = new THREE.Vector3(1, 0, -1).normalize();
+  let axis = new THREE.Vector3(1, -1, 0).normalize();
+ // let angle = (    5 * Math.acos(-1 / Math.sqrt(3.0))  ) / 2;
+  let angle = Math.atan(Math.sqrt(2));
   cubeGroup.rotateOnAxis(axis, angle);
 }
 
