@@ -11,27 +11,15 @@
 // Right-click "Paste".
 // Click green buttons to commit. Change message as desired.
 
-// cube.js (exports init() and animate() to app.js)
+// Cube module
+// cube.js
+// This module handles all cube-related logic, including cube creation, animation, and gap settings.
 
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 import { handleResize } from "./js/resize.js";
+import { animateOrRender, cubeSettings } from "./js/ui.js";
 
-export let renderer, camera, scene;
-let cubeGroup;
-
-export const inputs = {
-  doAnimateGap: false,
-  doAnimateRotation: false,
-  rotationDegrees: 0,
-};
-
-export const cubeSettings = {
-  size: 1,
-  gap: 0.4,
-  gapChangeDirection: 1,
-  maxGap: 1.0,
-  minGap: 0.3,
-};
+export let renderer, camera, scene, cubeGroup;
 
 export function init() {
   setupScene();
@@ -41,8 +29,12 @@ export function init() {
   createCubes();
   positionCubes();
   alignCubeGroup();
-  render();
+  animateOrRender();
   handleResize();
+}
+
+export function getNew3DVector(x, y, z) {
+  return new THREE.Vector3(x, y, z);
 }
 
 function setupScene() {
@@ -86,7 +78,7 @@ function createCubes() {
   }
 }
 
-function positionCubes() {
+export function positionCubes() {
   const gap = cubeSettings.gap;
   const cubeSize = cubeSettings.size;
   cubeGroup.children.forEach((cube) => {
@@ -103,51 +95,4 @@ function alignCubeGroup() {
   let axis = new THREE.Vector3(1, -1, 0).normalize();
   let angle = Math.atan(Math.sqrt(2));
   cubeGroup.rotateOnAxis(axis, angle);
-}
-
-export function render() {
-  if (inputs.doAnimateGap || inputs.doAnimateRotation) {
-    animate();
-  } else {
-    renderer.render(scene, camera);
-  }
-}
-
-export function animate() {
-  requestAnimationFrame(animate);
-  animateGap();
-  animateRotation();
-  renderer.render(scene, camera);
-}
-
-function animateGap() {
-  if (inputs.doAnimateGap) {
-    // Adjust the gap based on the direction
-    cubeSettings.gap += 0.005 * cubeSettings.gapChangeDirection;
-
-    // Check and reverse direction at the limits
-    if (cubeSettings.gap > cubeSettings.maxGap) {
-      cubeSettings.gap = cubeSettings.maxGap; // Set to max and reverse
-      cubeSettings.gapChangeDirection *= -1;
-    } else if (cubeSettings.gap < cubeSettings.minGap) {
-      cubeSettings.gap = cubeSettings.minGap; // Set to min and reverse
-      cubeSettings.gapChangeDirection *= -1;
-    }
-
-    positionCubes();
-  }
-}
-
-export function animateRotation() {
-  if (inputs.doAnimateRotation) {
-    let rotationSpeed = 0.01; // radians per frame
-    cubeGroup.rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), rotationSpeed);
-  }
-}
-
-export function setUserRotation(degrees) {
-  inputs.rotationDegrees = degrees; // Update the rotation value
-  const radians = (degrees * Math.PI) / 180;
-  // Update the cube rotation or any other object here
-  cubeGroup.rotation.y = radians; // Rotate around the y-axis to set user rotation
 }

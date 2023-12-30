@@ -1,17 +1,17 @@
-// Resize handling code
+// Resize handling module
 // js/resize.js
+// This module will handle resizing of the canvas and updating the renderer and camera accordingly.
 
-import { camera, renderer, scene} from '../cube.js';
+import { camera, renderer, scene } from "../cube.js";
 
 export function handleResize() {
-
   // Adjust canvas container
-  const canvasContainer = document.getElementById('canvas-container');
+  const canvasContainer = document.getElementById("canvas-container");
 
   if (canvasContainer) {
-    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-    const footerHeight = document.querySelector('footer')?.offsetHeight || 0;
-    const articleHeight = document.querySelector('article')?.offsetHeight || 0;
+    const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+    const footerHeight = document.querySelector("footer")?.offsetHeight || 0;
+    const articleHeight = document.querySelector("article")?.offsetHeight || 0;
 
     const availableHeight = window.innerHeight - headerHeight - footerHeight - articleHeight;
     canvasContainer.style.height = `${availableHeight}px`;
@@ -20,7 +20,9 @@ export function handleResize() {
   // Adjust Renderer and Camera
   if (renderer && camera) {
     const canvasWidth = canvasContainer ? canvasContainer.clientWidth : window.innerWidth;
-    const canvasHeight = canvasContainer ? canvasContainer.clientHeight : window.innerHeight - headerHeight - footerHeight;
+    const canvasHeight = canvasContainer
+      ? canvasContainer.clientHeight
+      : window.innerHeight - headerHeight - footerHeight;
 
     // Update camera aspect ratio and renderer size
     camera.aspect = canvasWidth / canvasHeight;
@@ -32,6 +34,5 @@ export function handleResize() {
   }
 }
 
-
-window.addEventListener('resize', handleResize);
-document.addEventListener('DOMContentLoaded', handleResize);
+window.addEventListener("resize", handleResize);
+document.addEventListener("DOMContentLoaded", handleResize);
