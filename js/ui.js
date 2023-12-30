@@ -1,7 +1,7 @@
 // UI interaction code
 // js/ui.js
 
-import { animate, inputs, render, cubeSettings , animateRotation, setUserRotation} from "../cube.js";
+import { inputs, render, cubeSettings , animateRotation, setUserRotation} from "../cube.js";
 
 // Get references to HTML elements
 const rotationCheckbox = document.getElementById('rotationCheckbox');
