@@ -34,16 +34,13 @@ export function setGapMax(max) {
   animateOrRender();
 }
 
-export function setUserRotation(degrees) {
-  inputs.rotation = degrees; // Update the rotation value
-  const radians = (degrees * Math.PI) / 180;
-  cubeGroup.rotation.y = radians; // Rotate around the y-axis to set user rotation
-}
-
 export function animateRotation() {
   if (inputs.doAnimateRotation) {
     const rotationVector = getNew3DVector(0, 0, 1);
-    cubeGroup.rotateOnWorldAxis(rotationVector, cubeSettings.rotationSpeed);
+    const amount1 = (inputs.rotation * Math.PI) / 180;
+    const amount2 = 0.01;
+    const amount3 = inputs.rotation *10;
+    cubeGroup.rotateOnWorldAxis(rotationVector, amount3);
   }
 }
 
@@ -104,6 +101,13 @@ rotationSlider.addEventListener("input", () => {
   document.getElementById("rotation").textContent = rotation;
   setUserRotation(rotation);
 });
+
+export function setUserRotation(inputRotation) {
+  inputs.rotation = inputRotation; // Update the rotation value
+  const radians = (inputRotation * Math.PI) / 180;
+  const rotationVector = getNew3DVector(0, 0, 1);
+  cubeGroup.rotateOnWorldAxis(rotationVector, cubeSettings.rotationSpeed);
+}
 
 setRotationSlider.addEventListener("click", () => {
   inputs.doAnimateRotation = false;
