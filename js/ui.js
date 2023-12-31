@@ -2,11 +2,18 @@
 // js/ui.js
 // This module will handle UI interactions, such as checkbox toggles and sliders, and communicate with the cube module.
 
-import { getNew3DVector, camera, renderer, scene, cubeGroup, positionCubes } from "../cube.js";
+import {
+  getNew3DVector,
+  camera,
+  renderer,
+  scene,
+  cubeGroup,
+  positionCubes,
+} from '../cube.js';
 
 export const inputs = {
-  doAnimateGap: false,
-  doAnimateRotation: false,
+  doAnimateGap: true,  // BHJ: change to false while working
+  doAnimateRotation: true, // BHJ: change to false while working
   rotation: 0,
 };
 
@@ -18,6 +25,119 @@ export const cubeSettings = {
   minGap: 0.3,
   rotationSpeed: 0.01,
 };
+
+//#region ROTATION ANIMATION AND SELECTION SLIDER
+
+// Get references to HTML elements
+
+const rotationCheckbox = document.getElementById('rotationAnimationCheckbox');
+const rotationSlider = document.getElementById('rotationSlider');
+const setRotationSlider = document.getElementById('rotationSlider');
+
+// Set initial state from input defaults
+
+rotationSlider.value = inputs.rotation;
+rotationCheckbox.checked = inputs.doAnimateRotation;
+
+// Configure event listeners to the function that handles that event
+
+rotationCheckbox.addEventListener('change', (event) => {
+  // if the user clicks on the rotation checkbox, start or stop the animation
+  // note that the set rotation slider should now reflect the current rotation based on the animation
+  inputs.doAnimateRotation = event.target.checked;
+  animateOrRender();
+});
+
+rotationSlider.addEventListener('input', () => {
+  // If the user changes the rotation slider, update the rotation value
+  // Make sure the rotation animation is off
+  const rotation = parseInt(rotationSlider.value);
+  document.getElementById('rotation').textContent = rotation;
+  setUserRotation(rotation);
+  animateOrRender();
+});
+
+setRotationSlider.addEventListener('click', () => {
+  // If the user clicks on the set rotation slider, stop the animation
+  // and set the rotation to the current value of the slider
+  inputs.doAnimateRotation = false;
+  rotationCheckbox.checked = inputs.doAnimateRotation;
+  animateOrRender();
+});
+
+// Rotation-related functions
+
+/**
+ * This function is called continuously to animate the rotation of the cube group.
+ */
+export function animateRotation() {
+  if (inputs.doAnimateRotation) {
+    const rotationVector = getNew3DVector(0, 0, 1);
+    const rotationSpeed = 0.01; // radians per frame
+    cubeGroup.rotateOnWorldAxis(rotationVector, rotationSpeed);
+  }
+}
+
+/**
+ * BHJ: This function is called when the user changes the rotation slider.
+ * @param {
+ * } inputRotation 
+ */
+export function setUserRotation(inputRotation) {
+  inputs.rotation = inputRotation; // Update the rotation value
+  const rotationVector = getNew3DVector(0, 0, 1);
+  const rotationSpeed = 0.01; // radians per frame
+
+  const amount1 = (inputs.rotation * Math.PI) / 180;
+  const amount2 = 0.01;
+  const amount3 = inputs.rotation + 10;
+  cubeGroup.rotateOnWorldAxis(rotationVector, cubeSettings.rotationSpeed);
+}
+
+//#endregion ROTATION ANIMATION AND SELECTION SLIDER
+
+//#region GAP ANIMATION
+
+// Get references to HTML elements
+
+const gapAnimationCheckbox = document.getElementById('gapAnimationCheckbox');
+const gapMinSlider = document.getElementById('gapMinSlider');
+const gapMaxSlider = document.getElementById('gapMaxSlider');
+
+// Set initial state from input defaults
+
+gapAnimationCheckbox.checked = inputs.doAnimateGap;
+gapMinSlider.value = cubeSettings.minGap;
+gapMaxSlider.value = cubeSettings.maxGap;
+
+// Configure event listeners to the function that handles that event
+
+gapAnimationCheckbox.addEventListener('change', (event) => {
+  inputs.doAnimateGap = event.target.checked;
+  animateOrRender();
+});
+
+gapMinSlider.addEventListener('input', (event) => {
+  let newMinValue = parseFloat(event.target.value);
+  let currentMaxValue = cubeSettings.maxGap;
+  if (newMinValue > currentMaxValue) {
+    newMinValue = currentMaxValue;
+    event.target.value = newMinValue;
+  }
+  cubeSettings.minGap = newMinValue;
+});
+
+gapMaxSlider.addEventListener('input', (event) => {
+  let newMaxValue = parseFloat(event.target.value);
+  let currentMinValue = cubeSettings.minGap;
+  if (newMaxValue < currentMinValue) {
+    newMaxValue = currentMinValue;
+    event.target.value = newMaxValue;
+  }
+  cubeSettings.maxGap = newMaxValue;
+});
+
+// Gap-related functions
 
 export function setGapAnimation(animate) {
   inputs.doAnimateGap = animate;
@@ -34,31 +154,9 @@ export function setGapMax(max) {
   animateOrRender();
 }
 
-export function animateRotation() {
-  if (inputs.doAnimateRotation) {
-    const rotationVector = getNew3DVector(0, 0, 1);
-    const amount1 = (inputs.rotation * Math.PI) / 180;
-    const amount2 = 0.01;
-    const amount3 = inputs.rotation *10;
-    cubeGroup.rotateOnWorldAxis(rotationVector, amount3);
-  }
-}
-
-export function animateOrRender() {
-  if (inputs.doAnimateGap || inputs.doAnimateRotation) {
-    animate();
-  } else {
-    renderer.render(scene, camera);
-  }
-}
-
-export function animate() {
-  requestAnimationFrame(animate);
-  animateGap();
-  animateRotation();
-  renderer.render(scene, camera);
-}
-
+/**
+ * This function is called continuously to animate the gap between the cubes.
+ */
 function animateGap() {
   if (inputs.doAnimateGap) {
     // Adjust the gap based on the direction
@@ -77,63 +175,33 @@ function animateGap() {
   }
 }
 
-// Get references to HTML elements
-const rotationCheckbox = document.getElementById("rotationCheckbox");
-const rotationSlider = document.getElementById("rotationSlider");
-const setRotationSlider = document.getElementById("rotationSlider"); // Add this line
-const gapAnimationCheckbox = document.getElementById("gapAnimationCheckbox");
-const gapMinSlider = document.getElementById("gapMinSlider");
-const gapMaxSlider = document.getElementById("gapMaxSlider");
+//#endregion GAP ANIMATION
 
-rotationSlider.value = inputs.rotation;
+//#region ANIMATION AND RENDERING
 
-rotationCheckbox.addEventListener("change", (event) => {
-  inputs.doAnimateRotation = event.target.checked;
-  if (inputs.doAnimateRotation) {
-    animateRotation(); // Start the animation
+/**
+ * This function decides whether to trigger animation or rendering based on user input.
+ * If either gap animation or rotation animation is enabled, it triggers animation.
+ * Otherwise, it renders the scene.
+ */
+export function animateOrRender() {
+  if (inputs.doAnimateGap || inputs.doAnimateRotation) {
+    animate();
   } else {
-    inputs.doAnimateRotation = false; // Stop animation
+    renderer.render(scene, camera);
   }
-});
-
-rotationSlider.addEventListener("input", () => {
-  const rotation = parseInt(rotationSlider.value);
-  document.getElementById("rotation").textContent = rotation;
-  setUserRotation(rotation);
-});
-
-export function setUserRotation(inputRotation) {
-  inputs.rotation = inputRotation; // Update the rotation value
-  const radians = (inputRotation * Math.PI) / 180;
-  const rotationVector = getNew3DVector(0, 0, 1);
-  cubeGroup.rotateOnWorldAxis(rotationVector, cubeSettings.rotationSpeed);
 }
 
-setRotationSlider.addEventListener("click", () => {
-  inputs.doAnimateRotation = false;
-});
+/**
+ * This function is called continuously to animate the scene.
+ */
+export function animate() {
+  requestAnimationFrame(animate);
+  animateGap();
+  animateRotation();
+  renderer.render(scene, camera);
+}
 
-gapAnimationCheckbox.addEventListener("change", (event) => {
-  inputs.doAnimateGap = event.target.checked;
-  animateOrRender();
-});
 
-gapMinSlider.addEventListener("input", (event) => {
-  let newMinValue = parseFloat(event.target.value);
-  let currentMaxValue = cubeSettings.maxGap;
-  if (newMinValue > currentMaxValue) {
-    newMinValue = currentMaxValue;
-    event.target.value = newMinValue;
-  }
-  cubeSettings.minGap = newMinValue;
-});
+//#endregion ANIMATION AND RENDERING
 
-gapMaxSlider.addEventListener("input", (event) => {
-  let newMaxValue = parseFloat(event.target.value);
-  let currentMinValue = cubeSettings.minGap;
-  if (newMaxValue < currentMinValue) {
-    newMaxValue = currentMinValue;
-    event.target.value = newMaxValue;
-  }
-  cubeSettings.maxGap = newMaxValue;
-});

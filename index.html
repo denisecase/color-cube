@@ -6,14 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Denise Case" />
     <meta name="description" content="Color Cube for use with MandArt" />
-    <!-- default-src 'self' https://unpkg.com/;
-         This directive restricts where resources can be loaded from. 
-         It allows loading resources from the same origin ('self') 
-         and from https://cdn.../ (for loading THREE.js). 
-         It restricts loading resources from any other external sites.
-        -->
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https://cdn.jsdelivr.net/npm/three@0.160.0/; connect-src 'self' ws://127.0.0.1:3001 http://127.0.0.1:3000/ ws://127.0.0.1:3000 http://127.0.0.1:3000/index.html;">
+    <!-- 
+        default-src 'self' url;
+            This directive controls where resources can be loaded from.
+            It permits loading resources from the same origin ('self') and 
+                from the specified URL (for loading THREE.js).
+            It restricts loading resources from any other external sites.
+
+        connect-src 'self' url;
+            This directive specifies which URIs the protected resource can load using script interfaces such as Ajax calls and WebSockets.
+            It allows loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
+            It restricts loading resources from any other external sites.
+
+        script-src 'self' url;
+            This directive defines which URIs the protected resource can load using script interfaces, including Ajax calls and WebSockets.
+            It permits loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
+            It restricts loading resources from any other external sites.
+
+        script-src-elem 'self' url;
+            This directive specifies which URIs the protected resource can load using script interfaces for elements like inline scripts.
+            It allows loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
+            It restricts loading resources from any other external sites.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' https://unpkg.com/three@0.160.0/; 
+        script-src-elem 'self' https://unpkg.com/three@0.160.0/; 
+        connect-src 'self' ws://127.0.0.1:3001 http://127.0.0.1:3000/ 
+        ws://127.0.0.1:3000 http://127.0.0.1:3000/index.html;
+        ">
     <title>Color Cube</title>
     <link rel="stylesheet" href="./css/cube.css">
     <link rel="shortcut icon" href="./favicon.ico">
@@ -38,7 +58,7 @@
                 Animate Size
             </label>
             <label>
-                <input type="checkbox" id="rotationCheckbox">
+                <input type="checkbox" id="rotationAnimationCheckbox">
                 Animate Rotation
             </label>
         </div>
@@ -77,7 +97,7 @@
 
     <footer>
         <section><a href="https://denisecase.github.io/MandArt-Docs/documentation/mandart/" target="_blank">
-                <img src="./mandart.png" alt="MandArt Logo"  loading="lazy">
+                <img src="./mandart.png" alt="MandArt Logo" loading="lazy">
                 MandArt Docs</a></section>
 
         <a href="https://github.com/denisecase/color-cube" target="_blank">
