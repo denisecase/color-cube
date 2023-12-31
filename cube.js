@@ -15,9 +15,19 @@
 // cube.js
 // This module handles all cube-related logic, including cube creation, animation, and gap settings.
 
-import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-import { handleResize } from "./js/resize.js";
-import { animateOrRender, cubeSettings } from "./js/ui.js";
+// app.js - start the app (called from index.html)
+
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+import { init } from './cube.js';
+import { animate } from './js/ui.js';
+import './js/resize.js';
+
+// Start the web app
+
+init();
+animate();
+import { handleResize } from './js/resize.js';
+import { animateOrRender, cubeSettings } from './js/ui.js';
 
 export let renderer, camera, scene, cubeGroup;
 
@@ -43,7 +53,12 @@ function setupScene() {
 }
 
 function setupCamera() {
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  );
   camera.position.set(0, -10, 0);
   camera.lookAt(scene.position);
 }
@@ -51,7 +66,7 @@ function setupCamera() {
 function setupRenderer() {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.getElementById("canvas-container").appendChild(renderer.domElement);
+  document.getElementById('canvas-container').appendChild(renderer.domElement);
 }
 
 function setupCubeGroup() {
@@ -85,7 +100,7 @@ export function positionCubes() {
     cube.position.set(
       cube.gridPosition.x * (cubeSize + gap),
       cube.gridPosition.y * (cubeSize + gap),
-      cube.gridPosition.z * (cubeSize + gap)
+      cube.gridPosition.z * (cubeSize + gap),
     );
   });
 }
