@@ -11,6 +11,15 @@
 // Right-click "Paste".
 // Click green buttons to commit. Change message as desired.
 
+//=============================
+// AFTER MAKING CHANGES - git add / commit / push
+//=============================
+// Menu / terminal / New Terminal 
+// git add . 
+// git commit -m "new stuff"
+// git push
+//=============================
+
 // Cube module
 // cube.js
 // This module handles all cube-related logic, including cube creation, animation, and gap settings.
