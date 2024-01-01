@@ -14,8 +14,8 @@
 //=============================
 // AFTER MAKING CHANGES - git add / commit / push
 //=============================
-// Menu / terminal / New Terminal 
-// git add . 
+// Menu / terminal / New Terminal
+// git add .
 // git commit -m "new stuff"
 // git push
 //=============================
@@ -26,7 +26,7 @@
 
 // app.js - start the app (called from index.html)
 
-import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { handleResize } from './js/resize.js';
 import { animateOrRender, cubeSettings } from './js/ui.js';
 
@@ -39,6 +39,7 @@ export function init() {
   setupCubeGroup();
   createCubes();
   positionCubes();
+  lowerCubeGroup(); // it's bigger
   alignCubeGroup();
   animateOrRender();
   handleResize();
@@ -77,13 +78,15 @@ function setupCubeGroup() {
 
 function createCubes() {
   const cubeSize = cubeSettings.size;
-  for (let x = -1; x <= 1; x++) {
-    for (let y = -1; y <= 1; y++) {
-      for (let z = -1; z <= 1; z++) {
+  const blocks = [0, 36, 73, 109, 146, 182, 219, 255];
+
+  for (let x = 0; x < blocks.length; x++) {
+    for (let y = 0; y < blocks.length; y++) {
+      for (let z = 0; z < blocks.length; z++) {
         const geometry = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
-        const r = Math.floor((x + 1) * 120);
-        const g = Math.floor((y + 1) * 120);
-        const b = Math.floor((z + 1) * 120);
+        const r = blocks[x];
+        const g = blocks[y];
+        const b = blocks[z];
         const color = new THREE.Color(`rgb(${r}, ${g}, ${b})`);
         const material = new THREE.MeshBasicMaterial({ color: color });
         const cube = new THREE.Mesh(geometry, material);
@@ -111,4 +114,10 @@ function alignCubeGroup() {
   let axis = new THREE.Vector3(1, -1, 0).normalize();
   let angle = Math.atan(Math.sqrt(2));
   cubeGroup.rotateOnAxis(axis, angle);
+}
+
+function lowerCubeGroup() {
+  // move the cubeGroup straight down (before we change the alignment)
+  // BHJ: this still needs work - it's not lowering the cubeGroup
+  cubeGroup.position.set(0, -2, 0);
 }
