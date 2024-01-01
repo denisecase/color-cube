@@ -74,7 +74,7 @@ setRotationSlider.addEventListener('click', (event) => {
   if (rotationSlider.value == rotationSlider.value) {
   const rotation = parseInt(rotationSlider.value);
   document.getElementById('rotation').textContent = rotation;
-  +setUserRotation(rotation);
+  setUserRotation(rotation);
 
 }
 
