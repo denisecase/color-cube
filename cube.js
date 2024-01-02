@@ -1,4 +1,3 @@
-// After Making Changes
 // Copy this URL to clipboard: https://github.com/denisecase/color-cube
 // Open Safari.
 // Put cursor in very top address location.
@@ -39,7 +38,6 @@ export function init() {
   setupCubeGroup();
   createCubes();
   positionCubes();
-  lowerCubeGroup(); // it's bigger
   alignCubeGroup();
   animateOrRender();
   handleResize();
@@ -56,13 +54,14 @@ function setupScene() {
 
 function setupCamera() {
   camera = new THREE.PerspectiveCamera(
-    75,
+    50,
     window.innerWidth / window.innerHeight,
     0.1,
-    1000,
+    100,
   );
-  camera.position.set(0, -10, 0);
-  camera.lookAt(scene.position);
+  const zValue = 6.3  //  set z value of both position and lookAt 
+  camera.position.set(0, -25, zValue);
+  camera.lookAt(0, 0, zValue);
 }
 
 function setupRenderer() {
@@ -116,8 +115,3 @@ function alignCubeGroup() {
   cubeGroup.rotateOnAxis(axis, angle);
 }
 
-function lowerCubeGroup() {
-  // move the cubeGroup straight down (before we change the alignment)
-  // BHJ: this still needs work - it's not lowering the cubeGroup
-  cubeGroup.position.set(0, -2, 0);
-}

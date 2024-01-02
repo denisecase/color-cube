@@ -12,8 +12,8 @@ import {
 } from '../cube.js';
 
 export const inputs = {
-  doAnimateGap: false, // BHJ
-  doAnimateRotation: true, // BHJ
+  doAnimateGap: false,  // BHJ: change to false while working
+  doAnimateRotation: false, // BHJ: change to false while working
   rotation: 0,
 };
 
@@ -21,8 +21,8 @@ export const cubeSettings = {
   size: 1,
   gap: 0.2,
   gapChangeDirection: 1,
-  maxGap: 1.0,
-  minGap: 0.0,
+ maxGap: 0.5,
+ minGap: 0.1,
 };
 
 //#region ROTATION ANIMATION AND SELECTION SLIDER
@@ -49,13 +49,13 @@ rotationCheckbox.addEventListener('change', (event) => {
 
 //  ROTATION SLIDER GETS TWO EVENTS
 
-rotationSlider.addEventListener('input', () => {
+  rotationSlider.addEventListener('input', () => {
   // If the user changes the rotation slider, update the rotation value
   // Make sure the rotation animation is off
 
   const rotation = parseInt(rotationSlider.value);
   document.getElementById('rotation').textContent = rotation;
-  // setUserRotation(rotation);
+ // setUserRotation(rotation);
 
   // always call this at the end
   animateOrRender();
@@ -67,20 +67,24 @@ setRotationSlider.addEventListener('click', (event) => {
   inputs.doAnimateRotation = false;
   rotationCheckbox.checked = inputs.doAnimateRotation;
 
-  // BHJ: Add if the value has NOT changed, then do the following
+  // BHJ: Add if the value has NOT changed, then do the folloowing
   // also rotate a bit in the direction they provided
 
   if (rotationSlider.value == rotationSlider.value) {
-    const rotation = parseInt(rotationSlider.value);
-    document.getElementById('rotation').textContent = rotation;
-    setUserRotation(rotation);
-  }
+  const rotation = parseInt(rotationSlider.value);
+  document.getElementById('rotation').textContent = rotation;
+  setUserRotation(rotation);
+
+}
 
   // always call this at the end
+
   animateOrRender();
 });
 
 // Rotation-related functions
+
+//const rotationAngle = 0.004; // radians per frame
 
 /**
  * This function is called continuously to animate the rotation of the cube group.
@@ -89,25 +93,26 @@ export function animateRotation() {
   if (inputs.doAnimateRotation) {
     const rotationVector = getNew3DVector(0, 0, 1);
     // const rotationAngle = 0.004; // radians per frame
-    // cubeGroup.rotateOnWorldAxis(rotationVector, rotationAngle);
-    cubeGroup.rotateOnWorldAxis(rotationVector, 0.004);
+   // cubeGroup.rotateOnWorldAxis(rotationVector, rotationAngle);
+     cubeGroup.rotateOnWorldAxis(rotationVector, 0.004);
   }
 }
 
 /**
  * BHJ: This function is called when the user changes the rotation slider.
  * @param {
- * } inputRotation
+ * } inputRotation 
  */
 
 export function setUserRotation(inputRotation) {
   inputs.rotation = inputRotation; // Update the rotation value
   const rotationVector = getNew3DVector(0, 0, 1);
 
-  let axis = rotationVector;
-  let angle = ((2 * Math.PI) / 360) * inputs.rotation;
+ let axis = rotationVector;
+ let angle = (2*Math.PI/360)*inputs.rotation;
 
   cubeGroup.rotateOnWorldAxis(axis, angle);
+
 }
 
 //#endregion ROTATION ANIMATION AND SELECTION SLIDER
@@ -176,7 +181,7 @@ export function setGapMax(max) {
 function animateGap() {
   if (inputs.doAnimateGap) {
     // Adjust the gap based on the direction
-    cubeSettings.gap += 0.005 * cubeSettings.gapChangeDirection;
+    cubeSettings.gap += 0.002 * cubeSettings.gapChangeDirection;
 
     // Check and reverse direction at the limits
     if (cubeSettings.gap > cubeSettings.maxGap) {
@@ -218,4 +223,6 @@ export function animate() {
   renderer.render(scene, camera);
 }
 
+
 //#endregion ANIMATION AND RENDERING
+
