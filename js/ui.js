@@ -12,8 +12,8 @@ import {
 } from '../cube.js';
 
 export const inputs = {
-  doAnimateGap: false,  // BHJ: change to false while working
-  doAnimateRotation: false, // BHJ: change to false while working
+  doAnimateGap: true,  // BHJ: change to false while working
+  doAnimateRotation: true, // BHJ: change to false while working
   rotation: 0,
 };
 
