@@ -8,6 +8,6 @@
  * It is imported and used in rotateUI.js.
  */
 export const rotateSettings = {
-  doAnimateRotation: true,  // Flag to enable/disable rotation animation.
+  doAnimateRotation: false,  // Flag to enable/disable rotation animation.
   initialRotation: 0,  // The initial rotation angle of the cube group.
 };
