@@ -32,6 +32,12 @@
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import './js/resize.js';
+import './js/gapSettings.js';
+import './js/rotateSettings.js';
+import './js/cubeSettings.js';
+import './js/cameraSettings.js';
+import './js/cubeUI.js';
+import './js/gapUI.js';
 import { init, animate } from './js/appUI.js';
 
 // Start the web app

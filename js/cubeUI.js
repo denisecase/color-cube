@@ -38,7 +38,7 @@
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { cubeSettings } from './cubeSettings.js';
-import { gap } from './gapUI.js';
+import { gapInfo } from './gapSettings.js';
 import { scene } from './appUI.js';
 
 export let cubeGroup;
@@ -137,9 +137,9 @@ export function positionCubes() {
   cubeGroup.children.forEach((cube) => {
     // Position each cube based on its grid position and the defined gap.
     cube.position.set(
-      cube.gridPosition.x * (cubeSize + gap),
-      cube.gridPosition.y * (cubeSize + gap),
-      cube.gridPosition.z * (cubeSize + gap),
+      cube.gridPosition.x * (cubeSize + gapInfo.currentGap),
+      cube.gridPosition.y * (cubeSize + gapInfo.currentGap),
+      cube.gridPosition.z * (cubeSize + gapInfo.currentGap),
     );
   });
 }

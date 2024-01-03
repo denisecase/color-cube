@@ -1,6 +1,6 @@
 /**
  * Main module for initializing and managing a 3D environment using Three.js.
- * 
+ *
  * This module serves as the core of a 3D application, handling the setup and
  * maintenance of various components essential for rendering a 3D scene. It imports
  * and utilizes Three.js for creating and manipulating 3D graphics.
@@ -18,17 +18,16 @@
  *
  * This module exports key components like the scene, camera, and renderer, along with
  * the initialization function and utility functions for the 3D environment.
- * 
+ *
  * It is imported and used in app.js, cubeUI.js, gapUI.js, rotateUI.js, and app.js.
  */
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { handleResize } from './resize.js';
-import { cameraSettings } from './cameraSettings.js';
-import { gapSettings } from './gapSettings.js';
+import { gapInfo, animateGap } from './gapSettings.js';
 import { rotateSettings } from './rotateSettings.js';
+import { cameraSettings } from './cameraSettings.js';
 import { initCubeGroup, cubeGroup, positionCubes } from './cubeUI.js';
-import { animateGap } from './gapUI.js';
 import { animateRotation } from './rotateUI.js';
 export let scene, camera, renderer;
 
@@ -112,12 +111,11 @@ function setupCamera() {
     cameraSettings.camera_set_position_on_z_axis, // e.g., 6.3
   );
 
-
   camera.lookAt(
     cameraSettings.camera_look_at_x_value, // e.g., 0
     cameraSettings.camera_look_at_y_value, // e.g., 0
-    cameraSettings.camera_look_at_z_value  // e.g., 6.3
-    );
+    cameraSettings.camera_look_at_z_value, // e.g., 6.3
+  );
 }
 
 /**
@@ -150,7 +148,7 @@ function setupRenderer() {
  * Otherwise, it renders the scene once without animation.
  */
 export function animateOrRender() {
-  if (gapSettings.doAnimateGap || rotateSettings.doAnimateRotation) {
+  if (gapInfo.doAnimateGap || rotateSettings.doAnimateRotation) {
     // Continue the animation loop if any animation is active.
     animate();
   } else {
