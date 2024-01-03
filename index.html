@@ -51,7 +51,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
     <link rel="preload" href="./mandart.png" as="image">
-    <link rel="preload" href="https://unpkg.com/three@0.160.0/build/three.module.js" as="script">
+    <link rel="preload" href="https://unpkg.com/three@0.160.0/build/three.module.js" as="script"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -72,14 +73,11 @@
         </div>
 
         <div class="gap-control-row">
-            <span>Size Gap:</span>
             <div class="slider-container">
-                <label for="gapMinSlider">Min</label>
-                <input type="range" id="gapMinSlider" min="0.1" max="1.0" step="0.1" value="0.3">
-                <span>to</span>
-                <input type="range" id="gapMaxSlider" min="0.1" max="1.0" step="0.1" value="1.0">
-                <label for="gapMaxSlider">Max</label>
-
+                <label for="gapMinSlider">Min Size Gap</label>
+                <input type="range" id="gapMinSlider" min="0" max="1.0" step="0.1">
+                <label for="gapMaxSlider">Max Size Gap</label>
+                <input type="range" id="gapMaxSlider" min="0" max="1.0" step="0.1">
             </div>
         </div>
 
@@ -87,7 +85,7 @@
         <div class="rotation-control-row">
             <div class="rotation-control">
                 <label>
-                    Set Rotation:
+                    Shift Rotation:
                     <input type="range" id="rotationSlider" min="-45" max="45" step="45" value="0">
                     <output id="rotation">0</output>
                 </label>

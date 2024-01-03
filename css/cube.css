@@ -126,9 +126,11 @@ footer img {
 
 .slider-container {
   display: flex;
-  align-items: center; /* Align slider and text vertically */
   flex-wrap: wrap; /* Allow sliders to wrap onto the next line if needed */
-  margin: 0 10px; /* Space around the slider container */
+  justify-content: center; /* Center the items */
+  gap: 10px; /* Space between label and slider */
+  width: 100%; /* Full width */
+
 }
 
 .slider-container input[type="range"] {
