@@ -92,7 +92,7 @@ function createCubes() {
   const cubeSize = cubeSettings.size;
 
   // An array defining the color intensity values to be used for each cube.
-  const blocks = [0, 36, 73, 109, 146, 182, 219, 255];
+  const blocks = cubeSettings.colorList;
 
   // Nested loops to create a 3D grid of cubes.
   for (let x = 0; x < blocks.length; x++) {
