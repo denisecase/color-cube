@@ -1,5 +1,5 @@
 /* Example of a Media Query for smaller screens */
-@media screen and (max-width: 100px) {
+/*@media screen and (max-width: 100px) {
   .gap-control-row,
   .rotation-control-row {
     flex-direction: column;
@@ -9,7 +9,7 @@
     width: 90%;
     margin: 10px auto;
   }
-}
+}*/
 
 body {
   margin: 0;
@@ -39,7 +39,7 @@ header h1 {
 }
 
 #canvas-container {
-  flex-grow: 1; /* Allow container to grow and push the footer down */
+  flex-grow: 0; /* Allow container to grow and push the footer down */
   display: flex;
   justify-content: center; /* Center canvas horizontally */
   align-items: center; /* Center canvas vertically */

@@ -35,6 +35,6 @@ export const cameraSettings = {
     const width = cubeSettings.size;
     const numGaps = numCubes -1;
     const gap = gapInfo.initialGap;
-    return (numCubes * width + numGaps * gap) * Math.cbrt(3)/2;
+    return (numCubes * width + numGaps * gap) * Math.sqrt(3)/2;
   }
 };
