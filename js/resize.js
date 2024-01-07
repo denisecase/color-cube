@@ -36,11 +36,11 @@ export function handleResize() {
     const canvasWidth = canvasContainer ? canvasContainer.clientWidth : window.innerWidth;
     const canvasHeight = canvasContainer
       ? canvasContainer.clientHeight
-      : window.innerHeight - headerHeight - footerHeight;
+      : window.innerHeight - headerHeight - footerHeight - articleHeight;
 
     // Update the aspect ratio of the camera and the size of the renderer.
-    camera.aspect = canvasWidth / canvasHeight;
-    camera.updateProjectionMatrix();
+   // camera.aspect = canvasWidth / canvasHeight;
+   // camera.updateProjectionMatrix();
     renderer.setSize(canvasWidth, canvasHeight);
 
     // Rerender the scene with the updated settings.
