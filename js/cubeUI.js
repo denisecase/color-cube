@@ -53,7 +53,7 @@ export function initCubeGroup() {
   setupCubeGroup();
   createCubes();
   positionCubes();
-  lowerCubeGroup(); // Adjusts cube group's position
+ // lowerCubeGroup(); // Adjusts cube group's position
   alignCubeGroup(); // Aligns cube group to desired orientation
 }
 
@@ -150,7 +150,7 @@ export function positionCubes() {
  * along the Y-axis. This is typically done before changing the alignment of the cube group
  * to ensure it is positioned correctly in the scene.
  */
-function lowerCubeGroup() {
+/*function lowerCubeGroup() {
   // Adjusting the position of the cubeGroup in the 3D world space.
   // The position is set using three coordinates: (x, y, z).
 
@@ -173,7 +173,7 @@ function lowerCubeGroup() {
     cubeSettings.lowerCubeGroupYCoordinate,
     cubeSettings.lowerCubeGroupZCoordinate,
   );
-}
+}*/
 
 /**
  * Aligns the cube group in the 3D scene.

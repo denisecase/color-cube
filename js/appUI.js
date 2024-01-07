@@ -80,12 +80,21 @@ function setupScene() {
  */
 function setupCamera() {
   // BHJ
-  camera = new THREE.PerspectiveCamera(
+ /* camera = new THREE.PerspectiveCamera(
     cameraSettings.field_of_view, // ~50-75
     window.innerWidth / window.innerHeight, // aspect ratio
     cameraSettings.near_clipping_plane, //~0.1
     cameraSettings.far_clipping_plane, //~100-1000
-  );
+  );*/
+
+  camera = new THREE.OrthographicCamera(
+    cameraSettings.left, // ~ -50
+    cameraSettings.right, // ~ 50
+    cameraSettings.top, // ~ 50
+    cameraSettings.bottom, // ~ -50
+    cameraSettings.near, // ~ 0
+    cameraSettings.far, // ~ 100
+  )
 
   // Setting the position of the camera in the 3D world space.
   // The position is defined by three coordinates: (x, y, z).
@@ -108,13 +117,13 @@ function setupCamera() {
   camera.position.set(
     cameraSettings.camera_set_position_on_x_axis, // e.g., 0
     cameraSettings.camera_set_position_on_y_axis, // e.g., -25
-    cameraSettings.camera_set_position_on_z_axis, // e.g., 6.3
+    cameraSettings.camera_set_position_on_z_axis, // e.g., 0
   );
 
   camera.lookAt(
     cameraSettings.camera_look_at_x_value, // e.g., 0
     cameraSettings.camera_look_at_y_value, // e.g., 0
-    cameraSettings.camera_look_at_z_value, // e.g., 6.3
+    cameraSettings.camera_look_at_z_value, // e.g., 0
   );
 }
 
