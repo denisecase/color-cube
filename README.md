@@ -35,3 +35,11 @@ Learn more about [Choosing Colors](https://denisecase.github.io/MandArt-Docs/doc
 - [MandArt-Discoveries](https://github.com/denisecase/MandArt-Discoveries/)
 
 ![MandArt](mandart.png)
+
+## Developer Commands
+
+```bash
+diff -u index.html ../box/index.html
+diff -u ./css/cube.css ../box/css/cube.css 
+diff -u ./css/cube.css ../box/css/cube.css |wc -l
+```

@@ -2,7 +2,8 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  min-height: 100vh; /* Ensures the body takes at least the viewport height */
+  padding-bottom: 60px; /* Adjust this to the height of your footer */
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
@@ -26,11 +27,13 @@ header h1 {
 }
 
 #canvas-container {
-  flex-grow: 0; /* Allow container to grow and push the footer down */
+  flex-grow: 1; /* Grow to use available space */
   display: flex;
-  justify-content: center; /* Center canvas horizontally */
-  align-items: center; /* Center canvas vertically */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Optional, based on your content */
 }
+
 
 canvas {
   max-width: 100%;
@@ -41,19 +44,19 @@ canvas {
 
 footer {
   display: flex;
-  flex-wrap: wrap; /* wrap onto the next line if needed */
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: center; /* Align items vertically */
+  align-items: center;
   padding: 10px 20px;
-  position: fixed; /* Stick to the bottom of the viewport */
+  position: fixed; /* Keeps the footer at the bottom */
   bottom: 0;
-  left: 0; 
+  left: 0;
   width: 100%;
   background-color: #333;
   color: #fff;
-  padding: 20px 0;
   text-align: center;
 }
+
 
 footer section,
 footer a {
@@ -160,3 +163,24 @@ input[type="range"],
 input[type="checkbox"] {
   cursor: pointer; /* Indicates interactivity */
 }
+
+/*
+To create a layout with a sticky footer that is always visible at the bottom of the viewport, and a canvas container that takes up all the available vertical room without pushing the footer off the page, you need to adjust the CSS to manage the space effectively.
+
+The key here is to ensure that the sum of the heights of the header, canvas container, and footer does not exceed the viewport height, and to allow the canvas container to flexibly fill the available space. Here's how you can adjust your CSS for this:
+
+Add Padding for Footer: Since the footer is fixed, you need to add padding to the bottom of the <body> equal to the height of the footer. This will prevent the canvas or any other content from being hidden behind the footer.
+
+Flex-Grow for Canvas Container: The flex-grow property on the #canvas-container should be set to 1, allowing it to expand and take up all available space between the header and the footer.
+
+Viewport Height for Body: The min-height of the body should be set to 100vh to make sure it takes up the full height of the viewport.
+*/
+
+/*
+In this setup:
+
+The footer is fixed at the bottom of the viewport.
+The body has enough padding at the bottom to account for the height of the footer.
+The canvas container (#canvas-container) grows to fill the available space.
+Remember to adjust the padding-bottom of the body to match the actual height of your footer. Also, the content inside the canvas container should be managed so that it fits within the available space, especially if it's dynamic or can change size.
+*/
