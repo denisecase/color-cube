@@ -194,7 +194,7 @@ function alignCubeGroup() {
   // 'Math.atan(Math.sqrt(2))' computes the angle needed to rotate the cube group
   // so that the white cube aligns as intended.
   // This specific calculation is based on the desired orientation of the cube group.
-  let angle = Math.atan(Math.sqrt(2));
+  let angle = 0*Math.atan(Math.sqrt(2));
 
   // Rotating the cube group around the specified axis by the calculated angle.
   // This method rotates the entire group of cubes, changing their orientation in the 3D space.

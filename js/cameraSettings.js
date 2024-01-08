@@ -14,17 +14,17 @@ export const cameraSettings = {
   near_clipping_plane: 0.1, // Static: The nearest distance from the camera at which objects will be rendered.
   far_clipping_plane: 100, // Static: The farthest distance from the camera at which objects will be rendered.*/
 
-  left: -50,
-  right: 50,
-  top: 50,
-  bottom: -50,
+  left: -12,
+  right: 12,
+  top: 12,
+  bottom: -12,
   near: 0,
   far: 100,
 
 
   camera_set_position_on_x_axis: 0, // Static: The initial position of the camera along the X-axis.
-  camera_set_position_on_y_axis: -25, // Static: The initial position of the camera along the Y-axis.
-  camera_set_position_on_z_axis: 0, // Static: The initial position of the camera along the Z-axis.
+  camera_set_position_on_y_axis: 0, // Static: The initial position of the camera along the Y-axis.
+  camera_set_position_on_z_axis: -25, // Static: The initial position of the camera along the Z-axis.
 
  /* // Dynamic: The initial position of the camera along the Z-axis, calculated based on cube and gap settings.
   get camera_set_position_on_z_axis() {

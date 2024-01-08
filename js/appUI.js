@@ -23,7 +23,7 @@
  */
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { handleResize } from './resize.js';
+//import { handleResize } from './resize.js';
 import { gapInfo, animateGap } from './gapSettings.js';
 import { rotateSettings } from './rotateSettings.js';
 import { cameraSettings } from './cameraSettings.js';
@@ -42,7 +42,7 @@ export function init() {
   setupRenderer();
   initCubeGroup();
   animateOrRender();
-  handleResize(); // Handles browser window resizing & maintain aspect ratio
+  //handleResize(); // Handles browser window resizing & maintain aspect ratio
 }
 
 /** Setup functions for the 3D environment
@@ -116,8 +116,8 @@ function setupCamera() {
 
   camera.position.set(
     cameraSettings.camera_set_position_on_x_axis, // e.g., 0
-    cameraSettings.camera_set_position_on_y_axis, // e.g., -25
-    cameraSettings.camera_set_position_on_z_axis, // e.g., 0
+    cameraSettings.camera_set_position_on_y_axis, // e.g., 0
+    cameraSettings.camera_set_position_on_z_axis, // e.g., -25
   );
 
   camera.lookAt(

@@ -18,7 +18,9 @@ import { camera, renderer, scene } from "./appUI.js";
  * considering the dimensions of other page elements like headers and footers.
  * It also updates the renderer and camera settings to match the new canvas size.
  */
-export function handleResize() {
+
+
+/*export function handleResize() {
   // Adjust canvas container dimensions based on the available window space.
   const canvasContainer = document.getElementById("canvas-container");
 
@@ -40,14 +42,15 @@ export function handleResize() {
 
     // Update the aspect ratio of the camera and the size of the renderer.
    // camera.aspect = canvasWidth / canvasHeight;
-   // camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
     renderer.setSize(canvasWidth, canvasHeight);
 
     // Rerender the scene with the updated settings.
-    renderer.render(scene, camera);
+     renderer.render(scene, camera);
   }
 }
+*/
 
 // Attach the handleResize function to window resize and DOMContentLoaded events.
-window.addEventListener("resize", handleResize);
-document.addEventListener("DOMContentLoaded", handleResize);
+//window.addEventListener("resize", handleResize);
+//document.addEventListener("DOMContentLoaded", handleResize);
