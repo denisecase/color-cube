@@ -38,24 +38,34 @@ export const cameraSettings = {
   far: 100,
 
   camera_x: 0,
-  camera_y: 0,
+  camera_y: 0, //camera_y_value,
   camera_z: -25,
 
   camera_look_x: 0,
-  camera_look_y: 0,
+  camera_look_y: 0, //camera_y_value,
   camera_look_z: 0,
   /* // Dynamic: The Z-coordinate of the point where the camera is directed, mirroring the Z-axis position.
    get camera_look_at_z_value() {
      return this.camera_z_value;
    },*/
-  /* // Dynamic: Calculated property for the camera z value, based on current cube color list and gap settings.
-   get camera_z_value() {
+
+   
+   
+  
+/*
+   // Dynamic: Calculated property for the camera y value, based on current cube color list and gap settings.
+   get camera_y_value() {
      const numCubes = cubeSettings.colorList.length;
      const width = cubeSettings.size;
      const numGaps = numCubes -1;
-     const gap = gapInfo.initialGap;
+     const gap = cubeSettings.initialGap;
+
+     console.log("gap", 4);
+
      return (numCubes * width + numGaps * gap) * Math.sqrt(3)/2;
-   }*/
+   }
+*/
+   
 };
 
 /**
