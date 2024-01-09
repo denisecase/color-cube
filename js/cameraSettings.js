@@ -4,10 +4,10 @@ import { cubeSettings } from './cubeUI.js';
 
 class CameraSettings {
   constructor() {
-    this.left = -18;
-    this.right = 18;
-    this.top = 18;
-    this.bottom = -18;
+    this.left = -14;
+    this.right = 14;
+    this.top = 14;
+    this.bottom = -14;
     this.near = 0;
     this.far = 100;
 
