@@ -13,59 +13,15 @@ import {
   scene,
 } from './appUI.js';
 
-// Get reference the HTML checkbox for rotation animation.
+// Get references to HTML elements for rotation control.
 const rotationCheckbox = document.getElementById('rotationCheckbox');
-
-// Get references to HTML elements for rotation control on each axis.
-const rotationXSlider = document.getElementById('rotationXSlider');
-const rotationYSlider = document.getElementById('rotationYSlider');
-const rotationZSlider = document.getElementById('rotationZSlider');
-
-// Add event listeners to the rotation sliders.
-rotationXSlider.addEventListener('input', () => updateRotationDisplayAndApply('X'));
-rotationYSlider.addEventListener('input', () => updateRotationDisplayAndApply('Y'));
-rotationZSlider.addEventListener('input', () => updateRotationDisplayAndApply('Z'));
+const rotationSlider = document.getElementById('rotationSlider');
+const setRotationSlider = document.getElementById('rotationSlider');
 
 export const rotateSettings = {
   doAnimateRotation: false, // Flag to enable/disable rotation animation.
   initialRotation: 0, // The initial rotation angle of the cube group.
 };
-
-/**
- * Updates the rotation display and applies the rotation for the specified axis.
- * @param {string} axis - The axis ('X', 'Y', or 'Z') to apply rotation to.
- */
-function updateRotationDisplayAndApply(axis) {
-  const slider = document.getElementById(`rotation${axis}Slider`);
-  const rotationValue = parseInt(slider.value);
-  document.getElementById(`rotation${axis}`).textContent = rotationValue;
-  setUserRotation(axis, rotationValue);
-  animateOrRender();
-}
-
-/**
- * Sets the rotation of the cube group based on user input for a specific axis.
- * @param {string} axis - The axis ('X', 'Y', or 'Z') to apply rotation to.
- * @param {number} rotationDegrees - The rotation value inputted by the user, in degrees.
- */
-function setUserRotation(axis, rotationDegrees) {
-  let rotationVector;
-  switch (axis) {
-    case 'X': rotationVector = new THREE.Vector3(1, 0, 0); break;
-    case 'Y': rotationVector = new THREE.Vector3(0, 1, 0); break;
-    case 'Z': rotationVector = new THREE.Vector3(0, 0, 1); break;
-    default: return;
-  }
-
-  let center = new THREE.Vector3();
-  cubeGroup.children.forEach(cube => center.add(cube.position));
-  center.divideScalar(cubeGroup.children.length);
-
-  cubeGroup.position.sub(center);
-  let angle = THREE.MathUtils.degToRad(rotationDegrees);
-  cubeGroup.rotateOnAxis(rotationVector, angle);
-  cubeGroup.position.add(center);
-}
 
 
 // Event listener for CHECKBOX CHANGE
@@ -76,47 +32,47 @@ rotationCheckbox.addEventListener('change', (event) => {
   animateOrRender(); // always
 });
 
-// // Event listener for SLIDER INPUT CHANGE
-// rotationSlider.addEventListener('input', () => {
-//   // Updates the rotation value based on the user's input on the slider.
-//   // The slider value represents the desired rotation angle in degrees.
-//   const rotation = parseInt(rotationSlider.value);
+// Event listener for SLIDER INPUT CHANGE
+rotationSlider.addEventListener('input', () => {
+  // Updates the rotation value based on the user's input on the slider.
+  // The slider value represents the desired rotation angle in degrees.
+  const rotation = parseInt(rotationSlider.value);
 
-//   // Update the text content of the 'rotation' element to reflect the new rotation value.
-//   // This is typically a display element in the UI showing the current rotation value.
-//   document.getElementById('rotation').textContent = rotation;
+  // Update the text content of the 'rotation' element to reflect the new rotation value.
+  // This is typically a display element in the UI showing the current rotation value.
+  document.getElementById('rotation').textContent = rotation;
 
-//   // Note: The following line is commented out. If active, it would set the user's rotation
-//   // immediately as the slider is moved, which could be used instead of the click event on setRotationSlider.
-//   // setUserRotation(rotation);
+  // Note: The following line is commented out. If active, it would set the user's rotation
+  // immediately as the slider is moved, which could be used instead of the click event on setRotationSlider.
+  // setUserRotation(rotation);
 
-//   animateOrRender(); // always
-// });
+  animateOrRender(); // always
+});
 
 // Event listener for SLIDER CLICK
-// setRotationSlider.addEventListener('click', (event) => {
-//   // When the set rotation slider is clicked, stop any ongoing rotation animation.
-//   rotateSettings.doAnimateRotation = false;
-//   // Update the checkbox to reflect the stopped animation.
-//   rotationCheckbox.checked = rotateSettings.doAnimateRotation;
+setRotationSlider.addEventListener('click', (event) => {
+  // When the set rotation slider is clicked, stop any ongoing rotation animation.
+  rotateSettings.doAnimateRotation = false;
+  // Update the checkbox to reflect the stopped animation.
+  rotationCheckbox.checked = rotateSettings.doAnimateRotation;
 
-//   // Check if the slider's value hasn't changed. Though this condition always evaluates to true,
-//   // it seems intended to check for a change in value. Might require a fix or update.
-//   if (rotationSlider.value == rotationSlider.value) {
-//     // Parse the slider's value as an integer for rotation.
-//     const rotation = parseInt(rotationSlider.value);
+  // Check if the slider's value hasn't changed. Though this condition always evaluates to true,
+  // it seems intended to check for a change in value. Might require a fix or update.
+  if (rotationSlider.value == rotationSlider.value) {
+    // Parse the slider's value as an integer for rotation.
+    const rotation = parseInt(rotationSlider.value);
 
-//     // Update the rotation display text to reflect the new value.
-//     document.getElementById('rotation').textContent = rotation;
+    // Update the rotation display text to reflect the new value.
+    document.getElementById('rotation').textContent = rotation;
 
-//     // Apply this new rotation value to the cube group.
-//     setUserRotation(rotation);
-//   }
+    // Apply this new rotation value to the cube group.
+    setUserRotation(rotation);
+  }
 
-//   // Always call animateOrRender at the end to update the scene.
-//   // This ensures the scene is rendered with the new settings.
-//   animateOrRender();
-// });
+  // Always call animateOrRender at the end to update the scene.
+  // This ensures the scene is rendered with the new settings.
+  animateOrRender();
+});
 
 // Toggle animation (after CHANGE)
 export function toggleRotationAnimation(doAnimate) {
@@ -137,6 +93,37 @@ export function animateRotation() {
   }
 }
 
+/**
+ * Sets the rotation of the cube group based on user input, rotating around the group's center.
+ *
+ * @param {number} inputRotation - The rotation value inputted by the user, in degrees.
+ */
+export function setUserRotation(inputRotation) {
+  // First, calculate the center of the cube group.
+  let center = new THREE.Vector3();
+  cubeGroup.children.forEach(cube => {
+    center.add(cube.position);
+  });
+  center.divideScalar(cubeGroup.children.length);
+
+  // Move the cube group to the origin for rotation.
+  cubeGroup.position.sub(center);
+
+  // Creating a rotation vector, which defines the axis of rotation.
+  const rotationVector = new THREE.Vector3(0, 0, 1); // Rotating around Z-axis
+
+  // Calculating the rotation angle in radians from degrees.
+  let angle = ((2 * Math.PI) / 360) * inputRotation;
+
+  // Apply the rotation.
+  cubeGroup.rotateOnAxis(rotationVector, angle);
+
+  // Move the cube group back to its original position.
+  cubeGroup.position.add(center);
+
+  // Update the scene to reflect the new rotation.
+  renderer.render(scene, camera);
+}
 
 
 /**
@@ -167,5 +154,5 @@ export function setUserRotationOld(inputRotation) {
 }
 
 // Set initial state of rotation controls from input defaults.
-//rotationSlider.value = rotateSettings.initialRotation;
+rotationSlider.value = rotateSettings.initialRotation;
 rotationCheckbox.checked = rotateSettings.doAnimateRotation;
