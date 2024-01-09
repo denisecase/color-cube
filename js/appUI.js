@@ -30,10 +30,10 @@ function setupScene() {
 }
 
 export const cameraSettings = {
-  left: -12,
-  right: 12,
-  top: 12,
-  bottom: -12,
+  left: -18,
+  right: 18,
+  top: 18,
+  bottom: -18,
   near: 0,
   far: 100,
 

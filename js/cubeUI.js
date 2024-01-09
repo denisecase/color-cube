@@ -112,16 +112,33 @@ function alignCubeGroup() {
   // The values here create a diagonal axis across the X and Y axes.
   // 'normalize()' is called to ensure that the axis vector has a unit length of 1.
   // This standardizes the rotation effect regardless of the axis length.
-  let axis = new THREE.Vector3(1, -1, 0).normalize();
+  let axis = new THREE.Vector3(1, 0, -1).normalize();
 
   // Calculating the angle for rotation.
   // 'Math.atan(Math.sqrt(2))' computes the angle needed to rotate the cube group
   // so that the white cube aligns as intended.
   // This specific calculation is based on the desired orientation of the cube group.
-  let angle = 0 * Math.atan(Math.sqrt(2));
+  let angle = -Math.atan(Math.sqrt(2));
+ // let angle = 5.3;
 
   // Rotating the cube group around the specified axis by the calculated angle.
   // This method rotates the entire group of cubes, changing their orientation in the 3D space.
   // The rotation is applied relative to their current position.
   cubeGroup.rotateOnAxis(axis, angle);
+
+
+  let rotationAxis = new THREE.Vector3(0, 1, 0).normalize();
+
+  // Defining the rotation axis. It is the same as the rotation vector.
+ // let axis = rotationVector;
+
+  // Calculating the rotation angle.
+  // The user input is assumed to be in degrees, so it's converted to radians.
+  // The conversion formula is: radians = (degrees * 2 * Math.PI) / 360.
+  let rotationAngle = 0.27;
+
+  // Rotating the cube group around the specified axis by the calculated angle.
+  // This applies the user's desired rotation to the entire group of cubes.
+  cubeGroup.rotateOnWorldAxis(rotationAxis, rotationAngle);
+
 }

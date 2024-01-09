@@ -62,7 +62,7 @@ rotationSlider.addEventListener('click', (event) => {
     document.getElementById('rotation').textContent = rotation;
 
     // Apply this new rotation value to the cube group.
-    setUserRotation(rotation);
+    setUserRotationOld(rotation);
   }
 
   // Always call animateOrRender at the end to update the scene.
@@ -94,16 +94,16 @@ export function animateRotation() {
  *
  * @param {number} inputRotation - The rotation value inputted by the user, in degrees.
  */
-export function setUserRotation(inputRotation) {
+/*export function setUserRotation(inputRotation) {
   // First, calculate the center of the cube group.
-  let center = new THREE.Vector3();
-  cubeGroup.children.forEach(cube => {
-    center.add(cube.position);
-  });
-  center.divideScalar(cubeGroup.children.length);
+ // let center = new THREE.Vector3();
+ // cubeGroup.children.forEach(cube => {
+ //   center.add(cube.position);
+ // });
+ // center.divideScalar(cubeGroup.children.length);
 
   // Move the cube group to the origin for rotation.
-  cubeGroup.position.sub(center);
+ // cubeGroup.position.sub(center);
 
   // Creating a rotation vector, which defines the axis of rotation.
   const rotationVector = new THREE.Vector3(0, 0, 1); // Rotating around Z-axis
@@ -115,11 +115,11 @@ export function setUserRotation(inputRotation) {
   cubeGroup.rotateOnAxis(rotationVector, angle);
 
   // Move the cube group back to its original position.
-  cubeGroup.position.add(center);
+ // cubeGroup.position.add(center);
 
   // Update the scene to reflect the new rotation.
   renderer.render(scene, camera);
-}
+}*/
 
 
 /**
@@ -134,19 +134,23 @@ export function setUserRotationOld(inputRotation) {
 
   // Creating a rotation vector, which defines the axis of rotation.
   // Here, the rotation is set to occur around the Z-axis (0, 0, 1).
-  const rotationVector = getNew3DVector(0, 0, 1);
+  //const rotationVector = getNew3DVector(0, 1, 0);
+  let axis = new THREE.Vector3(0, 1, 0).normalize();
 
   // Defining the rotation axis. It is the same as the rotation vector.
-  let axis = rotationVector;
+ // let axis = rotationVector;
 
   // Calculating the rotation angle.
   // The user input is assumed to be in degrees, so it's converted to radians.
-  // The conversion formula is: radians = (degrees * Math.PI) / 180.
+  // The conversion formula is: radians = (degrees * 2 * Math.PI) / 360.
   let angle = ((2 * Math.PI) / 360) * rotateSettings.initialRotation;
 
   // Rotating the cube group around the specified axis by the calculated angle.
   // This applies the user's desired rotation to the entire group of cubes.
   cubeGroup.rotateOnWorldAxis(axis, angle);
+
+  // Update the scene to reflect the new rotation.
+  renderer.render(scene, camera);
 }
 
 // Set initial state of rotation controls from input defaults.
