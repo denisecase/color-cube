@@ -1,8 +1,5 @@
 /**
  * This file contains the functions and event listeners for the rotation controls.
- * It defines the rotation animation and the rotation slider.
- * It also defines the functions for setting the rotation of the cube group.
-
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { cubeGroup } from './cubeUI.js';
@@ -16,11 +13,10 @@ import {
 // Get references to HTML elements for rotation control.
 const rotationCheckbox = document.getElementById('rotationCheckbox');
 const rotationSlider = document.getElementById('rotationSlider');
-const setRotationSlider = document.getElementById('rotationSlider');
 
 export const rotateSettings = {
-  doAnimateRotation: false, // Flag to enable/disable rotation animation.
-  initialRotation: 0, // The initial rotation angle of the cube group.
+  doAnimateRotation: false, 
+  initialRotation: 0, 
 };
 
 
@@ -50,7 +46,7 @@ rotationSlider.addEventListener('input', () => {
 });
 
 // Event listener for SLIDER CLICK
-setRotationSlider.addEventListener('click', (event) => {
+rotationSlider.addEventListener('click', (event) => {
   // When the set rotation slider is clicked, stop any ongoing rotation animation.
   rotateSettings.doAnimateRotation = false;
   // Update the checkbox to reflect the stopped animation.
