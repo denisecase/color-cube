@@ -2,14 +2,12 @@
  * This file contains the functions and event listeners for the rotation controls.
  * It defines the rotation animation and the rotation slider.
  * It also defines the functions for setting the rotation of the cube group.
- * 
- * It is imported and used in appUI.js.
+
  */
-import { rotateSettings } from './rotateSettings.js';
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { cubeGroup } from './cubeUI.js';
 import {
   animateOrRender,
-  getNew3DVector,
   camera,
   renderer,
   scene,
@@ -20,9 +18,11 @@ const rotationCheckbox = document.getElementById('rotationAnimationCheckbox');
 const rotationSlider = document.getElementById('rotationSlider');
 const setRotationSlider = document.getElementById('rotationSlider');
 
-// Set initial state of rotation controls from input defaults.
-rotationSlider.value = rotateSettings.initialRotation;
-rotationCheckbox.checked = rotateSettings.doAnimateRotation;
+export const rotateSettings = {
+  doAnimateRotation: false, // Flag to enable/disable rotation animation.
+  initialRotation: 0, // The initial rotation angle of the cube group.
+};
+
 
 // Event listener for CHECKBOX CHANGE
 rotationCheckbox.addEventListener('change', (event) => {
@@ -85,11 +85,8 @@ export function toggleRotationAnimation(doAnimate) {
  * It's called in a loop to create a dynamic, rotating visual effect in the 3D scene.
  */
 export function animateRotation() {
-  // Check if rotation animation is enabled.
   if (rotateSettings.doAnimateRotation) {
-    // Define the axis of rotation.
-    // The rotation is set around the Z-axis, as indicated by the vector (0, 0, 1).
-    const rotationVector = getNew3DVector(0, 0, 1);
+    const rotationVector = new THREE.Vector3(0, 0, 1);
     // The angle for each frame's rotation, in radians.
     // A small value like 0.004 ensures a smooth and continuous rotation effect.
     cubeGroup.rotateOnWorldAxis(rotationVector, 0.004);
@@ -97,12 +94,45 @@ export function animateRotation() {
 }
 
 /**
+ * Sets the rotation of the cube group based on user input, rotating around the group's center.
+ *
+ * @param {number} inputRotation - The rotation value inputted by the user, in degrees.
+ */
+export function setUserRotation(inputRotation) {
+  // First, calculate the center of the cube group.
+  let center = new THREE.Vector3();
+  cubeGroup.children.forEach(cube => {
+    center.add(cube.position);
+  });
+  center.divideScalar(cubeGroup.children.length);
+
+  // Move the cube group to the origin for rotation.
+  cubeGroup.position.sub(center);
+
+  // Creating a rotation vector, which defines the axis of rotation.
+  const rotationVector = new THREE.Vector3(0, 0, 1); // Rotating around Z-axis
+
+  // Calculating the rotation angle in radians from degrees.
+  let angle = ((2 * Math.PI) / 360) * inputRotation;
+
+  // Apply the rotation.
+  cubeGroup.rotateOnAxis(rotationVector, angle);
+
+  // Move the cube group back to its original position.
+  cubeGroup.position.add(center);
+
+  // Update the scene to reflect the new rotation.
+  renderer.render(scene, camera);
+}
+
+
+/**
  * Sets the rotation of the cube group based on user input.
  * This function is typically called when the user adjusts the rotation slider.
  *
  * @param {number} inputRotation - The rotation value inputted by the user.
  */
-export function setUserRotation(inputRotation) {
+export function setUserRotationOld(inputRotation) {
   // Update the global rotation value with the input from the user.
   rotateSettings.initialRotation = inputRotation;
 
@@ -122,3 +152,7 @@ export function setUserRotation(inputRotation) {
   // This applies the user's desired rotation to the entire group of cubes.
   cubeGroup.rotateOnWorldAxis(axis, angle);
 }
+
+// Set initial state of rotation controls from input defaults.
+rotationSlider.value = rotateSettings.initialRotation;
+rotationCheckbox.checked = rotateSettings.doAnimateRotation;
