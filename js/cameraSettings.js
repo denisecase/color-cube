@@ -30,8 +30,8 @@ class CameraSettings {
   }
 
   initialize() {
-    this.camera_y = 0; // this.calculated_camera_y_value;
-    this.camera_look_y = 0; //this.calculated_camera_y_value;
+    this.camera_y = this.calculated_camera_y_value;
+    this.camera_look_y = this.calculated_camera_y_value;
   }
 }
 
