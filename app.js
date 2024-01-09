@@ -33,9 +33,8 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import './js/resize.js';
 import './js/cubeUI.js';
-import './js/gapUI.js';
-import { init, animate } from './js/appUI.js';
+import { init, animateOrRender } from './js/appUI.js';
 
 // Start the web app
 init();
-animate();
+animateOrRender();

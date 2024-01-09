@@ -63,35 +63,37 @@
     <article>
         <div class="animation-controls">
             <label>
-                <input type="checkbox" id="gapAnimationCheckbox">
-                Animate Size
-            </label>
-            <label>
-                <input type="checkbox" id="rotationAnimationCheckbox">
+                <input type="checkbox" id="rotationCheckbox">
                 Animate Rotation
             </label>
         </div>
-
-        <div class="gap-control-row">
-            <div class="slider-container">
-                <label for="gapMinSlider">Min Size Gap</label>
-                <input type="range" id="gapMinSlider" min="0" max="1.0" step="0.1">
-                <label for="gapMaxSlider">Max Size Gap</label>
-                <input type="range" id="gapMaxSlider" min="0" max="1.0" step="0.1">
-            </div>
-        </div>
-
-        <!-- Range Sliders for User Rotation index.html -->
+    
+        <!-- Range Sliders for User Rotation -->
         <div class="rotation-control-row">
             <div class="rotation-control">
                 <label>
-                    Shift Rotation:
-                    <input type="range" id="rotationSlider" min="-45" max="45" step="45" value="0">
-                    <output id="rotation">0</output>
+                    Rotate X-axis:
+                    <input type="range" id="rotationXSlider" min="-180" max="180" step="1" value="0">
+                    <output id="rotationX">0</output>
+                </label>
+            </div>
+            <div class="rotation-control">
+                <label>
+                    Rotate Y-axis:
+                    <input type="range" id="rotationYSlider" min="-180" max="180" step="1" value="0">
+                    <output id="rotationY">0</output>
+                </label>
+            </div>
+            <div class="rotation-control">
+                <label>
+                    Rotate Z-axis:
+                    <input type="range" id="rotationZSlider" min="-180" max="180" step="1" value="0">
+                    <output id="rotationZ">0</output>
                 </label>
             </div>
         </div>
     </article>
+    
 
     <div id="canvas-container">
         <!-- The canvas element will be appended here by THREE.js -->

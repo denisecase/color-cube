@@ -30,7 +30,6 @@
  *
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { gapInfo } from './gapUI.js';
 import { scene } from './appUI.js';
 
 export let cubeGroup;
@@ -62,15 +61,16 @@ function setupCubeGroup() {
 export const cubeSettings = {
   size: 1,
   colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
+  initialGap: 0.2, // The initial gap size between cubes.
 };
 
 function createCube(x, y, z, color, geometry) {
   const material = new THREE.MeshBasicMaterial({ color });
   const cube = new THREE.Mesh(geometry, material);
   cube.position.set(
-    x * (cubeSettings.size + gapInfo.currentGap),
-    y * (cubeSettings.size + gapInfo.currentGap),
-    z * (cubeSettings.size + gapInfo.currentGap),
+    x * (cubeSettings.size + cubeSettings.initialGap),
+    y * (cubeSettings.size + cubeSettings.initialGap),
+    z * (cubeSettings.size + cubeSettings.initialGap),
   );
   cubeGroup.add(cube);
 }

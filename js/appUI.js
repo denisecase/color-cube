@@ -4,7 +4,6 @@
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 //import { handleResize } from './resize.js';
-import { gapInfo, animateGap } from './gapUI.js';
 import { rotateSettings } from './rotateUI.js';
 import { initCubeGroup, cubeGroup } from './cubeUI.js';
 import { animateRotation } from './rotateUI.js';
@@ -100,7 +99,7 @@ function setupRenderer() {
  * Otherwise, it renders the scene once without animation.
  */
 export function animateOrRender() {
-  if (gapInfo.doAnimateGap || rotateSettings.doAnimateRotation) {
+  if ( rotateSettings.doAnimateRotation) {
     // Continue the animation loop if any animation is active.
     animate();
   } else {
@@ -118,8 +117,7 @@ export function animate() {
   // Continuously request the next frame for smooth animation.
   requestAnimationFrame(animate);
 
-  // Apply gap and rotation animations as needed.
-  animateGap();
+  // Apply rotation animations as needed.
   animateRotation();
 
   // Render the updated scene.
