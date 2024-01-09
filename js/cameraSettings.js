@@ -25,13 +25,13 @@ class CameraSettings {
     const width = cubeSettings.size;
     const numGaps = numCubes - 1;
     const gap = cubeSettings.initialGap;
-    console.log('gap', 4);
+    console.log('gap', gap);
     return ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
   }
 
   initialize() {
-    this.camera_y = this.calculated_camera_y_value;
-    this.camera_look_y = this.calculated_camera_y_value;
+    this.camera_y = 0; // this.calculated_camera_y_value;
+    this.camera_look_y = 0; //this.calculated_camera_y_value;
   }
 }
 

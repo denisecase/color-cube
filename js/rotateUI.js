@@ -75,7 +75,7 @@ export function toggleRotationAnimation(doAnimate) {
  */
 export function animateRotation() {
   if (rotateSettings.doAnimateRotation) {
-    const rotationVector = new THREE.Vector3(0, 0, 1);
+    const rotationVector = new THREE.Vector3(0, 1, 0);
     // The angle for each frame's rotation, in radians.
     // A small value like 0.004 ensures a smooth and continuous rotation effect.
     cubeGroup.rotateOnWorldAxis(rotationVector, 0.004);
