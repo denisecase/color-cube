@@ -27,7 +27,6 @@
 
 /**
  * This file contains the functions for setting up the main cube group in the 3D scene.
- *
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { scene } from './appUI.js';
@@ -35,10 +34,7 @@ import { scene } from './appUI.js';
 export let cubeGroup;
 
 /**
- * Initializes the cube group by setting up the group, creating cubes, positioning them,
- * adjusting the cube group's position, and aligning it to the desired orientation.
- *
- * It is exported and used by appUI.js.
+ * Initializes the cube group 
  */
 export function initCubeGroup() {
   setupCubeGroup();
@@ -51,9 +47,6 @@ export function initCubeGroup() {
  */
 function setupCubeGroup() {
   // Creating a new Group object.
-  // A Group is a collection of objects that can be manipulated together.
-  // In this case, cubeGroup will hold all the individual cubes, allowing us to perform
-  // operations on the entire set of cubes at once.
   cubeGroup = new THREE.Group();
   scene.add(cubeGroup);
 }
@@ -126,11 +119,7 @@ function alignCubeGroup() {
   // The rotation is applied relative to their current position.
   cubeGroup.rotateOnAxis(axis, angle);
 
-
   let rotationAxis = new THREE.Vector3(0, 1, 0).normalize();
-
-  // Defining the rotation axis. It is the same as the rotation vector.
- // let axis = rotationVector;
 
   // Calculating the rotation angle.
   // The user input is assumed to be in degrees, so it's converted to radians.

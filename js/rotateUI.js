@@ -3,22 +3,16 @@
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { cubeGroup } from './cubeUI.js';
-import {
-  animateOrRender,
-  camera,
-  renderer,
-  scene,
-} from './appUI.js';
+import { animateOrRender, camera, renderer, scene } from './appUI.js';
 
 // Get references to HTML elements for rotation control.
 const rotationCheckbox = document.getElementById('rotationCheckbox');
 const rotationSlider = document.getElementById('rotationSlider');
 
 export const rotateSettings = {
-  doAnimateRotation: false, 
-  initialRotation: 0, 
+  doAnimateRotation: false,
+  initialRotation: 0,
 };
-
 
 // Event listener for CHECKBOX CHANGE
 rotationCheckbox.addEventListener('change', (event) => {
@@ -66,7 +60,6 @@ rotationSlider.addEventListener('click', (event) => {
   }
 
   // Always call animateOrRender at the end to update the scene.
-  // This ensures the scene is rendered with the new settings.
   animateOrRender();
 });
 
@@ -121,7 +114,6 @@ export function animateRotation() {
   renderer.render(scene, camera);
 }*/
 
-
 /**
  * Sets the rotation of the cube group based on user input.
  * This function is typically called when the user adjusts the rotation slider.
@@ -138,7 +130,7 @@ export function setUserRotationOld(inputRotation) {
   let axis = new THREE.Vector3(0, 1, 0).normalize();
 
   // Defining the rotation axis. It is the same as the rotation vector.
- // let axis = rotationVector;
+  // let axis = rotationVector;
 
   // Calculating the rotation angle.
   // The user input is assumed to be in degrees, so it's converted to radians.

@@ -4,6 +4,7 @@
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 //import { handleResize } from './resize.js';
+import { cameraSettings } from './cameraSettings.js';
 import { rotateSettings } from './rotateUI.js';
 import { initCubeGroup, cubeGroup } from './cubeUI.js';
 import { animateRotation } from './rotateUI.js';
@@ -14,9 +15,9 @@ export let scene, camera, renderer;
  */
 export function init() {
   setupScene();
+  initCubeGroup();
   setupCamera();
   setupRenderer();
-  initCubeGroup();
   animateOrRender();
   //handleResize(); // Handles browser window resizing & maintain aspect ratio
 }
@@ -29,49 +30,12 @@ function setupScene() {
   scene.background = new THREE.Color(0xffffff);
 }
 
-export const cameraSettings = {
-  left: -18,
-  right: 18,
-  top: 18,
-  bottom: -18,
-  near: 0,
-  far: 100,
-
-  camera_x: 0,
-  camera_y: 0, //camera_y_value,
-  camera_z: -25,
-
-  camera_look_x: 0,
-  camera_look_y: 0, //camera_y_value,
-  camera_look_z: 0,
-  /* // Dynamic: The Z-coordinate of the point where the camera is directed, mirroring the Z-axis position.
-   get camera_look_at_z_value() {
-     return this.camera_z_value;
-   },*/
-
-   
-   
-  
-/*
-   // Dynamic: Calculated property for the camera y value, based on current cube color list and gap settings.
-   get camera_y_value() {
-     const numCubes = cubeSettings.colorList.length;
-     const width = cubeSettings.size;
-     const numGaps = numCubes -1;
-     const gap = cubeSettings.initialGap;
-
-     console.log("gap", 4);
-
-     return (numCubes * width + numGaps * gap) * Math.sqrt(3)/2;
-   }
-*/
-   
-};
-
 /**
  * Sets up the camera for the 3D scene.
  */
 function setupCamera() {
+  cameraSettings.initialize();
+
   camera = new THREE.OrthographicCamera(
     cameraSettings.left,
     cameraSettings.right,
@@ -82,15 +46,15 @@ function setupCamera() {
   );
 
   camera.position.set(
-    cameraSettings.camera_x, // e.g., 0
-    cameraSettings.camera_y, // e.g., 0
-    cameraSettings.camera_z, // e.g., -25
+    cameraSettings.camera_x,
+    cameraSettings.camera_y,
+    cameraSettings.camera_z,
   );
 
   camera.lookAt(
-    cameraSettings.camera_look_x, // e.g., 0
-    cameraSettings.camera_look_y, // e.g., 0
-    cameraSettings.camera_look_z, // e.g., 0
+    cameraSettings.camera_look_x,
+    cameraSettings.camera_look_y,
+    cameraSettings.camera_look_z,
   );
 }
 
@@ -109,7 +73,7 @@ function setupRenderer() {
  * Otherwise, it renders the scene once without animation.
  */
 export function animateOrRender() {
-  if ( rotateSettings.doAnimateRotation) {
+  if (rotateSettings.doAnimateRotation) {
     // Continue the animation loop if any animation is active.
     animate();
   } else {
@@ -133,4 +97,3 @@ export function animate() {
   // Render the updated scene.
   renderer.render(scene, camera);
 }
-

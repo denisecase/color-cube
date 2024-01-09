@@ -1,0 +1,38 @@
+// cameraSettings.js - now a class
+
+import { cubeSettings } from './cubeUI.js';
+
+class CameraSettings {
+  constructor() {
+    this.left = -18;
+    this.right = 18;
+    this.top = 18;
+    this.bottom = -18;
+    this.near = 0;
+    this.far = 100;
+
+    this.camera_x = 0;
+    this.camera_y = 0; // This will be set dynamically
+    this.camera_z = -25;
+
+    this.camera_look_x = 0;
+    this.camera_look_y = 0; // This will be set dynamically
+    this.camera_look_z = 0;
+  }
+
+  get calculated_camera_y_value() {
+    const numCubes = cubeSettings.colorList.length;
+    const width = cubeSettings.size;
+    const numGaps = numCubes - 1;
+    const gap = cubeSettings.initialGap;
+    console.log('gap', 4);
+    return ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
+  }
+
+  initialize() {
+    this.camera_y = this.calculated_camera_y_value;
+    this.camera_look_y = this.calculated_camera_y_value;
+  }
+}
+
+export const cameraSettings = new CameraSettings();
