@@ -36,7 +36,7 @@ article {
   top: 50px; /* Adjust this value based on the actual height of your header */
   z-index: 5;
   background-color: #555;
-  padding: 10px;
+  padding: 5px;
   color: white;
 }
 
@@ -63,7 +63,9 @@ footer {
     text-align: center;
     padding: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-evenly; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    flex-wrap: wrap; /* Allow items to wrap */
 }
 
 footer a {
