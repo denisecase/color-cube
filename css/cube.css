@@ -51,6 +51,7 @@ article {
   justify-content: center;
   align-items: center;
   overflow: auto;
+  height: 800px; /* per ChatGPT */
 }
 
 footer {
