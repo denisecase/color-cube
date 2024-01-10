@@ -27,7 +27,7 @@ export function init() {
  */
 function setupScene() {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
+  scene.background = new THREE.Color(0xdddddd);
 }
 
 /**
