@@ -6,35 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Bruce Johnson and Denise Case" />
     <meta name="description" content="Color Cube for use with MandArt" />
-    <!-- 
-        default-src 'self' url;
-            This directive controls where resources can be loaded from.
-            It permits loading resources from the same origin ('self') and 
-                from the specified URL (for loading THREE.js).
-            It restricts loading resources from any other external sites.
-
-        connect-src 'self' url;
-            This directive specifies which URIs the protected resource can load using script interfaces such as Ajax calls and WebSockets.
-            It allows loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
-            It restricts loading resources from any other external sites.
-
-        script-src 'self' url;
-            This directive defines which URIs the protected resource can load using script interfaces, including Ajax calls and WebSockets.
-            It permits loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
-            It restricts loading resources from any other external sites.
-
-        script-src-elem 'self' url;
-            This directive specifies which URIs the protected resource can load using script interfaces for elements like inline scripts.
-            It allows loading resources from the same origin ('self') and from the specified URL (for loading THREE.js).
-            It restricts loading resources from any other external sites.
-    
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self' https://unpkg.com/three@0.160.0/; 
-        script-src-elem 'self' https://unpkg.com/three@0.160.0/; 
-        connect-src 'self' ws://127.0.0.1:3001 http://127.0.0.1:3000/ 
-        ws://127.0.0.1:3000 http://127.0.0.1:3000/index.html;
-        "> 
-        -->
     <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     connect-src 'self';
@@ -53,21 +24,6 @@
     <link rel="preload" href="./mandart.png" as="image">
     <link rel="preload" href="https://unpkg.com/three@0.160.0/build/three.module.js" as="script"
         crossorigin="anonymous">
-
-        <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        #canvas-container {
-            overflow: auto;
-            width: 100vw;
-            height: 100vh;
-        }
-    </style>
-
-
 </head>
 
 <body>
@@ -75,46 +31,38 @@
         <img src="./mandart.png" alt="MandArt Logo" id="header-logo" loading="lazy">
         <h1>MandArt Color Cube</h1>
     </header>
+
     <article>
         <div class="animation-controls">
             <label>
-                <input type="checkbox" id="rotationCheckbox">
-                Animate Rotation
+                <input type="checkbox" id="rotationCheckbox"> Animate Rotation
             </label>
         </div>
-    
-        <!-- Range Sliders for User Rotation -->
-        <div class="rotation-control-row">
-            <div class="rotation-control-row">
-                <div class="rotation-control">
-                    <label>
-                        Shift Rotation:
-                        <input type="range" id="rotationSlider" min="-60" max="60" step="60" value="0">
-                        <output id="rotation">0</output>
-                    </label>
-                </div>
-            </div>
+
+        <div class="rotation-control">
+            <label>
+                Shift Rotation:
+                <input type="range" id="rotationSlider" min="-60" max="60" step="60" value="0">
+                <output id="rotation">0</output>
+            </label>
         </div>
     </article>
-    
+
 
     <div id="canvas-container">
         <!-- The canvas element will be appended here by THREE.js -->
-
     </div>
- <!--
-    Select colors for <a href="https://apps.apple.com/us/app/mandart/id6445924588?mt=12">MandArt</a></h2>
--->
 
 
     <footer>
-        <section><a href="https://denisecase.github.io/MandArt-Docs/documentation/mandart/" target="_blank">
-                <img src="./mandart.png" alt="MandArt Logo" loading="lazy">
-                MandArt Docs</a></section>
-
+        <a href="https://denisecase.github.io/MandArt-Docs/documentation/mandart/" target="_blank">
+            <img src="./mandart.png" alt="MandArt Logo">
+            MandArt Docs
+        </a>
         <a href="https://github.com/denisecase/color-cube" target="_blank">
             <img src="./github-mark/github-mark-white.svg" alt="GitHub Logo">
-            GitHub Source Repo</a>
+            GitHub Source Repo
+        </a>
     </footer>
 
     <script type="module" src="./app.js"></script>
@@ -122,99 +70,3 @@
 </body>
 
 </html>
-
-
- <!--
-Chat GPT code:
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        connect-src 'self';
-        script-src-elem 'self' https://unpkg.com/three@0.160.0/ http://localhost; 
-        script-src 'self' 'unsafe-inline' https://unpkg.com/three@0.160.0/build/three.module.js ;
-        object-src 'none';
-        base-uri 'none';
-        require-trusted-types-for 'script';
-    ">
-    <title>Color Cube</title>
-    <link rel="stylesheet" href="./css/cube.css">
-    <link rel="shortcut icon" href="./favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
-    <link rel="preload" href="./mandart.png" as="image">
-    <link rel="preload" href="https://unpkg.com/three@0.160.0/build/three.module.js" as="script" crossorigin="anonymous">
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        #canvas-container {
-            overflow: auto;
-            width: 100vw;
-            height: 100vh;
-        }
-    </style>
-</head>
-
-<body>
-    <header>
-        <img src="./mandart.png" alt="MandArt Logo" id="header-logo" loading="lazy">
-        <h1>MandArt Color Cube</h1>
-    </header>
-    <article>
-        <div class="animation-controls">
-            <label>
-                <input type="checkbox" id="rotationCheckbox">
-                Animate Rotation
-            </label>
-        </div>
-
-        -->
-    
-        <!-- Range Sliders for User Rotation -->
-
-        <!--
-        <div class="rotation-control-row">
-            <div class="rotation-control-row">
-                <div class="rotation-control">
-                    <label>
-                        Shift Rotation:
-                        <input type="range" id="rotationSlider" min="-60" max="60" step="60" value="0">
-                        <output id="rotation">0</output>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </article>
-
-    <div id="canvas-container">
-
-    -->
-        <!-- The canvas element will be appended here by THREE.js -->
-
-        <!--
-    </div>
-
-    <footer>
-        <section><a href="https://denisecase.github.io/MandArt-Docs/documentation/mandart/" target="_blank">
-                <img src="./mandart.png" alt="MandArt Logo" loading="lazy">
-                MandArt Docs</a></section>
-
-        <a href="https://github.com/denisecase/color-cube" target="_blank">
-            <img src="./github-mark/github-mark-white.svg" alt="GitHub Logo">
-            GitHub Source Repo</a>
-    </footer>
-
-    <script type="module" src="./app.js"></script>
-</body>
-</html>
-
--->

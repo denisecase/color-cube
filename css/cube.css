@@ -1,186 +1,99 @@
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensures the body takes at least the viewport height */
-  padding-bottom: 60px; /* Adjust this to the height of your footer */
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
   color: #333;
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
-  align-items: center; /* Centers vertically */
-  justify-content: center; /* Centers horizontally */
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: #444;
 }
 
 header h1 {
-  text-align: center; /* Keeps text centered */
   margin-left: 10px; /* space between image and h1 text */
+  color: white;
+  font: 1.5em Arial, sans-serif;
 }
 
-#header-logo {
-  height: 100px;
-  width: auto; /* Maintain aspect ratio */
+header img {
+  height: 50px;
+  width: auto;
+}
+
+article {
+  position: sticky;
+  top: 50px; /* Adjust this value based on the actual height of your header */
+  z-index: 5;
+  background-color: #555;
+  padding: 10px;
+  color: white;
+}
+
+.animation-controls, .rotation-control {
+  text-align: center;
+  margin: 10px 0;
 }
 
 #canvas-container {
-  flex-grow: 1; /* Grow to use available space */
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Optional, based on your content */
+  overflow: auto;
 }
-
-
-canvas {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-/* Sticky footer styles - always visible */
 
 footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 10px 20px;
-  position: fixed; /* Keeps the footer at the bottom */
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-}
-
-
-footer section,
-footer a {
-  display: flex;
-  align-items: center; /* Align items vertically inside each link */
-  margin: 0; /* Remove default margin */
-  flex: 1; /* each item can grow and take available space */
-  min-width: 50%; /* Minimum width for each item before wrapping */
-  justify-content: center; /* Center content within each flex item */
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 footer a {
   color: #fff;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 footer img {
-  height: 30px;
-  vertical-align: middle;
+  height: 20px;
   margin-right: 5px;
 }
 
-/* Styles for Animation Controls */
-
-.animation-controls {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #444;
-  color: white;
+/* Additional styles for input elements and responsiveness */
+input[type='range'], input[type='checkbox'] {
+  cursor: pointer;
 }
 
-.animation-controls label {
-  margin: 0 10px;
-  font-size: 16px;
+@media (max-width: 600px) {
+  header, footer {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  header img, footer img {
+      margin-bottom: 5px;
+  }
+
+  .rotation-control, .animation-controls {
+      flex-direction: column;
+  }
 }
-
-.animation-controls input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-/* Styles for Gap Controls */
-
-.gap-control-row {
-  display: flex;
-  flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
-  align-items: center; /* Aligns items vertically */
-  justify-content: center; /* Centers items horizontally */
-  padding: 20px 0;
-  background-color: #555;
-  color: white;
-  text-align: center;
-}
-
-.gap-control-row > span {
-  margin: 0 5px; /* Space around the 'Gap:' label and 'to' */
-}
-
-.slider-container {
-  display: flex;
-  flex-wrap: wrap; /* Allow sliders to wrap onto the next line if needed */
-  justify-content: center; /* Center the items */
-  gap: 10px; /* Space between label and slider */
-  width: 100%; /* Full width */
-
-}
-
-.slider-container input[type="range"] {
-  margin: 0 10px; /* Space around each slider */
-}
-
-/* Styles for Rotation Control */
-
-.rotation-control-row {
-  display: flex;
-  flex-wrap: wrap; /* Allows items to wrap onto the next line if needed */
-  justify-content: space-around; /* Distributes space evenly */
-  padding: 10px 0;
-  background-color: #666;
-  color: white;
-}
-
-.rotation-control-row .rotation-control {
-  display: flex; /* Enables Flexbox for the control */
-  align-items: center; /* Aligns items vertically */
-  flex: 1; /* Allows each control to grow and take available space */
-  margin: 5px; /* Adds a small margin around each control */
-  justify-content: center; /* Center content within each control */
-}
-
-.rotation-control-row label {
-  display: flex; /* Flex layout for label contents */
-  align-items: center; /* Aligns label text and input/slider/output */
-  margin-right: 10px; /* Space between label and the next item */
-}
-
-.rotation-control-row input[type="range"] {
-  margin: 0 10px; /* Space around the slider */
-}
-
-.rotation-control-row output {
-  margin-left: 10px; /* Space between slider and output */
-}
-input[type="range"],
-input[type="checkbox"] {
-  cursor: pointer; /* Indicates interactivity */
-}
-
-/*
-To create a layout with a sticky footer that is always visible at the bottom of the viewport, and a canvas container that takes up all the available vertical room without pushing the footer off the page, you need to adjust the CSS to manage the space effectively.
-
-The key here is to ensure that the sum of the heights of the header, canvas container, and footer does not exceed the viewport height, and to allow the canvas container to flexibly fill the available space. Here's how you can adjust your CSS for this:
-
-Add Padding for Footer: Since the footer is fixed, you need to add padding to the bottom of the <body> equal to the height of the footer. This will prevent the canvas or any other content from being hidden behind the footer.
-
-Flex-Grow for Canvas Container: The flex-grow property on the #canvas-container should be set to 1, allowing it to expand and take up all available space between the header and the footer.
-
-Viewport Height for Body: The min-height of the body should be set to 100vh to make sure it takes up the full height of the viewport.
-*/
-
-/*
-In this setup:
-
-The footer is fixed at the bottom of the viewport.
-The body has enough padding at the bottom to account for the height of the footer.
-The canvas container (#canvas-container) grows to fill the available space.
-Remember to adjust the padding-bottom of the body to match the actual height of your footer. Also, the content inside the canvas container should be managed so that it fits within the available space, especially if it's dynamic or can change size.
-*/
