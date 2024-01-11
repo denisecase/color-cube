@@ -7,7 +7,6 @@ import { animateOrRender, camera, renderer, scene } from './appUI.js';
 
 // Get references to HTML elements for rotation control.
 const rotationCheckbox = document.getElementById('rotationCheckbox');
-const rotationSlider = document.getElementById('rotationSlider');
 const rotationButtonLeft = document.getElementById('rotationButtonLeft');
 const rotationButtonRight = document.getElementById('rotationButtonRight');
 
@@ -22,47 +21,6 @@ rotationCheckbox.addEventListener('change', (event) => {
   // If checked, start the rotation animation; if unchecked, stop it.
   rotateSettings.doAnimateRotation = event.target.checked;
   animateOrRender(); // always
-});
-
-// Event listener for SLIDER INPUT CHANGE
-rotationSlider.addEventListener('input', () => {
-  // Updates the rotation value based on the user's input on the slider.
-  // The slider value represents the desired rotation angle in degrees.
-  const rotation = parseInt(rotationSlider.value);
-
-  // Update the text content of the 'rotation' element to reflect the new rotation value.
-  // This is typically a display element in the UI showing the current rotation value.
-  document.getElementById('rotation').textContent = rotation;
-
-  // Note: The following line is commented out. If active, it would set the user's rotation
-  // immediately as the slider is moved, which could be used instead of the click event on setRotationSlider.
-  // setUserRotation(rotation);
-
-  animateOrRender(); // always
-});
-
-// Event listener for SLIDER CLICK
-rotationSlider.addEventListener('click', (event) => {
-  // When the set rotation slider is clicked, stop any ongoing rotation animation.
-  rotateSettings.doAnimateRotation = false;
-  // Update the checkbox to reflect the stopped animation.
-  rotationCheckbox.checked = rotateSettings.doAnimateRotation;
-
-  // Check if the slider's value hasn't changed. Though this condition always evaluates to true,
-  // it seems intended to check for a change in value. Might require a fix or update.
-  if (rotationSlider.value == rotationSlider.value) {
-    // Parse the slider's value as an integer for rotation.
-    const rotation = parseInt(rotationSlider.value);
-
-    // Update the rotation display text to reflect the new value.
-    document.getElementById('rotation').textContent = rotation;
-
-    // Apply this new rotation value to the cube group.
-    setUserRotation(rotation);
-  }
-
-  // Always call animateOrRender at the end to update the scene.
-  animateOrRender();
 });
 
 // Event listener for SLIDER BUTTON LEFT
@@ -134,5 +92,4 @@ export function setUserRotation(inputRotation) {
 }
 
 // Set initial state of rotation controls from input defaults.
-rotationSlider.value = rotateSettings.initialRotation;
 rotationCheckbox.checked = rotateSettings.doAnimateRotation;

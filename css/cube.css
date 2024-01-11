@@ -6,7 +6,6 @@ body {
   min-height: 100vh; /* Ensures the body takes at least the viewport height */
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  color: #333;
 }
 
 header {
@@ -40,7 +39,8 @@ article {
   color: white;
 }
 
-.animation-controls, .rotation-control {
+.animation-controls,
+.rotation-control {
   text-align: center;
   margin: 10px 0;
 }
@@ -52,22 +52,21 @@ article {
   align-items: center;
   overflow: auto;
   height: 800px; /* per ChatGPT */
-  background-color: #000;
 }
 
 footer {
   position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    display: flex;
-    justify-content: space-evenly; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    flex-wrap: wrap; /* Allow items to wrap */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap; /* Allow items to wrap */
 }
 
 footer a {
@@ -83,33 +82,37 @@ footer img {
 }
 
 /* Additional styles for input elements and responsiveness */
-input[type='range'], input[type='checkbox'] {
+input[type='range'],
+input[type='checkbox'] {
   cursor: pointer;
 }
 
 /* radio buttons container */
 .cube-count-control {
-  display: flex; 
-  justify-content: space-around; 
-  flex-wrap: wrap; 
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 /* each radio button div  */
 .cube-count-control > div {
-  margin: 5px; 
+  margin: 5px;
 }
 
 @media (max-width: 600px) {
-  header, footer {
-      flex-direction: column;
-      text-align: center;
+  header,
+  footer {
+    flex-direction: column;
+    text-align: center;
   }
 
-  header img, footer img {
-      margin-bottom: 5px;
+  header img,
+  footer img {
+    margin-bottom: 5px;
   }
 
-  .rotation-control, .animation-controls {
-      flex-direction: column;
+  .rotation-control,
+  .animation-controls {
+    flex-direction: column;
   }
 }

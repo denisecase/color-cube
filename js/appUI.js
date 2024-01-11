@@ -1,9 +1,6 @@
-/**
- * Main module for initializing and managing a 3D environment using Three.js.
- */
+// Main module for initializing and managing a 3D environment using Three.js.
 
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-//import { handleResize } from './resize.js';
 import { cameraSettings } from './cameraSettings.js';
 import { rotateSettings } from './rotateUI.js';
 import { initCubeGroup, cubeGroup } from './cubeUI.js';
