@@ -21,9 +21,13 @@ class CameraSettings {
   }
 
   get calculated_camera_y_value() {
-    const numCubes = cubeSettings.colorList.length;
+   // const numCubes = cubeSettings.colorList.length;
+    const numCubes = cubeSettings.cubeCount;
+    console.log('cubeCount', cubeCount);
     const width = cubeSettings.size;
+    console.log('cubeSettings.size', cubeSettings.size);
     const numGaps = numCubes - 1;
+    console.log('numGaps', numGaps);
     const gap = cubeSettings.initialGap;
     console.log('gap', gap);
     return ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
