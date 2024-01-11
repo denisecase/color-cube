@@ -58,7 +58,7 @@ rotationSlider.addEventListener('click', (event) => {
     document.getElementById('rotation').textContent = rotation;
 
     // Apply this new rotation value to the cube group.
-    setUserRotationOld(rotation);
+    setUserRotation(rotation);
   }
 
   // Always call animateOrRender at the end to update the scene.
@@ -70,7 +70,7 @@ rotationButtonLeft.addEventListener('click', (event) => {
   rotateSettings.doAnimateRotation = false;
   rotationCheckbox.checked = rotateSettings.doAnimateRotation;
   const rotation = -60;
-  setUserRotationOld(rotation);
+  setUserRotation(rotation);
   animateOrRender();
 });
 
@@ -79,7 +79,7 @@ rotationButtonRight.addEventListener('click', (event) => {
   rotateSettings.doAnimateRotation = false;
   rotationCheckbox.checked = rotateSettings.doAnimateRotation;
   const rotation = 60;
-  setUserRotationOld(rotation);
+  setUserRotation(rotation);
   animateOrRender();
 });
 
@@ -103,44 +103,12 @@ export function animateRotation() {
 }
 
 /**
- * Sets the rotation of the cube group based on user input, rotating around the group's center.
- *
- * @param {number} inputRotation - The rotation value inputted by the user, in degrees.
- */
-/*export function setUserRotation(inputRotation) {
-  // First, calculate the center of the cube group.
- // let center = new THREE.Vector3();
- // cubeGroup.children.forEach(cube => {
- //   center.add(cube.position);
- // });
- // center.divideScalar(cubeGroup.children.length);
-
-  // Move the cube group to the origin for rotation.
- // cubeGroup.position.sub(center);
-
-  // Creating a rotation vector, which defines the axis of rotation.
-  const rotationVector = new THREE.Vector3(0, 0, 1); // Rotating around Z-axis
-
-  // Calculating the rotation angle in radians from degrees.
-  let angle = ((2 * Math.PI) / 360) * inputRotation;
-
-  // Apply the rotation.
-  cubeGroup.rotateOnAxis(rotationVector, angle);
-
-  // Move the cube group back to its original position.
- // cubeGroup.position.add(center);
-
-  // Update the scene to reflect the new rotation.
-  renderer.render(scene, camera);
-}*/
-
-/**
  * Sets the rotation of the cube group based on user input.
  * This function is typically called when the user adjusts the rotation slider.
  *
  * @param {number} inputRotation - The rotation value inputted by the user.
  */
-export function setUserRotationOld(inputRotation) {
+export function setUserRotation(inputRotation) {
   // Update the global rotation value with the input from the user.
   rotateSettings.initialRotation = inputRotation;
 

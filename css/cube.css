@@ -87,6 +87,18 @@ input[type='range'], input[type='checkbox'] {
   cursor: pointer;
 }
 
+/* radio buttons container */
+.cube-count-control {
+  display: flex; 
+  justify-content: space-around; 
+  flex-wrap: wrap; 
+}
+
+/* each radio button div  */
+.cube-count-control > div {
+  margin: 5px; 
+}
+
 @media (max-width: 600px) {
   header, footer {
       flex-direction: column;

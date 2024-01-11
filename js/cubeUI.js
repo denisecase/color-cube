@@ -29,12 +29,36 @@
  * This file contains the functions for setting up the main cube group in the 3D scene.
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { scene } from './appUI.js';
+import { animateOrRender, scene } from './appUI.js';
 
 export let cubeGroup;
 
+export const cubeSettings = {
+  size: 1,
+  cubeCount: 9,
+  colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
+  initialGap: 0.2, 
+};
+
+const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
+
+// Event listener for RADIO BUTTON CHANGE
+function onCubeCountChange() {
+  cubeSettings.cubeCount = parseInt(this.value);
+  createCubes(); // do I need initCubeGroup() instead?
+  animateOrRender(); // always
+}
+
+// Add an event listener to each radio button
+cubeCountControls.forEach((radio) => {
+  radio.addEventListener('input', onCubeCountChange);
+  if (parseInt(radio.value) === cubeSettings.cubeCount) {
+    radio.checked = true;
+  }
+});
+
 /**
- * Initializes the cube group 
+ * Initializes the cube group
  */
 export function initCubeGroup() {
   setupCubeGroup();
@@ -46,17 +70,18 @@ export function initCubeGroup() {
  * Initializes and configures the cube group in the 3D scene.
  */
 function setupCubeGroup() {
-  // Creating a new Group object.
   cubeGroup = new THREE.Group();
   scene.add(cubeGroup);
 }
 
-export const cubeSettings = {
-  size: 1,
- // colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
-  colorList: [32, 64, 96, 128, 160, 192, 224],
-  initialGap: 0.2, // The initial gap size between cubes.
-};
+function getColorListFromCubeCount(count) {
+  const fullList = cubeSettings.colorList;
+  const removeCount = (fullList.length - count) / 2;
+  if (removeCount <= 0) {
+    return fullList;
+  }
+  return fullList.slice(removeCount, fullList.length - removeCount);
+}
 
 function createCube(x, y, z, color, geometry) {
   const material = new THREE.MeshBasicMaterial({ color });
@@ -73,7 +98,13 @@ function createCube(x, y, z, color, geometry) {
  * Creates a set of colored cubes and adds them to the cube group.
  */
 function createCubes() {
-  const blocks = cubeSettings.colorList;
+  // Clear existing cubes from the cubeGroup
+  while (cubeGroup.children.length > 0) {
+    cubeGroup.remove(cubeGroup.children[0]);
+  }
+
+  const colorListForNCubes = getColorListFromCubeCount(cubeSettings.cubeCount);
+  const blocks = colorListForNCubes;
   const geometry = new THREE.BoxGeometry(
     cubeSettings.size,
     cubeSettings.size,
@@ -113,7 +144,7 @@ function alignCubeGroup() {
   // so that the white cube aligns as intended.
   // This specific calculation is based on the desired orientation of the cube group.
   let angle = -Math.atan(Math.sqrt(2));
- // let angle = 5.3;
+  // let angle = 5.3;
 
   // Rotating the cube group around the specified axis by the calculated angle.
   // This method rotates the entire group of cubes, changing their orientation in the 3D space.
@@ -130,5 +161,10 @@ function alignCubeGroup() {
   // Rotating the cube group around the specified axis by the calculated angle.
   // This applies the user's desired rotation to the entire group of cubes.
   cubeGroup.rotateOnWorldAxis(rotationAxis, rotationAngle);
+}
 
+// Set initial value based on the currently selected radio button
+const selectedRadio = document.querySelector('input[name="cubeCount"]:checked');
+if (selectedRadio) {
+  cubeSettings.cubeCount = parseInt(selectedRadio.value);
 }
