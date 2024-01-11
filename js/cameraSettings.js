@@ -1,4 +1,4 @@
-// cameraSettings.js - now a class
+// cameraSettings.js - a class
 
 import { cubeSettings } from './cubeUI.js';
 
@@ -21,15 +21,18 @@ class CameraSettings {
   }
 
   get calculated_camera_y_value() {
-   // const numCubes = cubeSettings.colorList.length;
     const numCubes = cubeSettings.cubeCount;
     console.log('numCubes', numCubes);
+
     const width = cubeSettings.size;
     console.log('cubeSettings.size', cubeSettings.size);
+
     const numGaps = numCubes - 1;
     console.log('numGaps', numGaps);
+
     const gap = cubeSettings.initialGap;
     console.log('gap', gap);
+
     return ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
   }
 

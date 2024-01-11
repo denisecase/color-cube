@@ -19,7 +19,7 @@
   AFTER MAKING CHANGES (git add/commit/push)
   =========================================
   1. Open Terminal: Menu -> Terminal -> New Terminal
-  2. Run these commands:
+  2. Run:
      git add .
      git commit -m "new stuff"
      git push
@@ -30,6 +30,7 @@
  */
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { animateOrRender, scene } from './appUI.js';
+import { cameraSettings } from './cameraSettings.js';
 
 export let cubeGroup;
 
@@ -45,7 +46,8 @@ const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
 // Event listener for RADIO BUTTON CHANGE
 function onCubeCountChange() {
   cubeSettings.cubeCount = parseInt(this.value);
-  createCubes(); // do I need initCubeGroup() instead?
+  createCubes();
+  cameraSettings.initialize();
   animateOrRender(); // always
 }
 
