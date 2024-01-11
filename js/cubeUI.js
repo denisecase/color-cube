@@ -53,7 +53,8 @@ function setupCubeGroup() {
 
 export const cubeSettings = {
   size: 1,
-  colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
+ // colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
+  colorList: [32, 64, 96, 128, 160, 192, 224],
   initialGap: 0.2, // The initial gap size between cubes.
 };
 

@@ -8,6 +8,8 @@ import { animateOrRender, camera, renderer, scene } from './appUI.js';
 // Get references to HTML elements for rotation control.
 const rotationCheckbox = document.getElementById('rotationCheckbox');
 const rotationSlider = document.getElementById('rotationSlider');
+const rotationButtonLeft = document.getElementById('rotationButtonLeft');
+const rotationButtonRight = document.getElementById('rotationButtonRight');
 
 export const rotateSettings = {
   doAnimateRotation: false,
@@ -60,6 +62,24 @@ rotationSlider.addEventListener('click', (event) => {
   }
 
   // Always call animateOrRender at the end to update the scene.
+  animateOrRender();
+});
+
+// Event listener for SLIDER BUTTON LEFT
+rotationButtonLeft.addEventListener('click', (event) => {
+  rotateSettings.doAnimateRotation = false;
+  rotationCheckbox.checked = rotateSettings.doAnimateRotation;
+  const rotation = -60;
+  setUserRotationOld(rotation);
+  animateOrRender();
+});
+
+// Event listener for SLIDER BUTTON RIGHT
+rotationButtonRight.addEventListener('click', (event) => {
+  rotateSettings.doAnimateRotation = false;
+  rotationCheckbox.checked = rotateSettings.doAnimateRotation;
+  const rotation = 60;
+  setUserRotationOld(rotation);
   animateOrRender();
 });
 
