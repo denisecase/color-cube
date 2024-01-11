@@ -18,6 +18,8 @@ class CameraSettings {
     this.camera_look_x = 0;
     this.camera_look_y = 0; // This will be set dynamically
     this.camera_look_z = 0;
+
+   // console.log('y calc:', y);
   }
 
   get calculated_camera_y_value() {
@@ -33,13 +35,24 @@ class CameraSettings {
     const gap = cubeSettings.initialGap;
     console.log('gap', gap);
 
-    return ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
+    const y = ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
+    console.log('y calc:', y);
+
+    return y;
   }
 
   initialize() {
-    this.camera_y = this.calculated_camera_y_value;
-    this.camera_look_y = this.calculated_camera_y_value;
+   // this.camera_y = this.calculated_camera_y_value;
+   // this.camera_look_y = this.calculated_camera_y_value;
+
+   const y = this.calculated_camera_y_value; // Get the calculated value
+   this.camera_y = y;
+    this.camera_look_y = y;
+     console.log('y calc:', y);
+     console.log('this.camera_y', this.camera_y);
+     console.log('this.camera_look_y', this.camera_look_y);
   }
 }
 
 export const cameraSettings = new CameraSettings();
+
