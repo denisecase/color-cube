@@ -9,6 +9,10 @@ In MandArt, the colors in your selected color list will be blended and will flow
 Each color gradient will transition along a straight line between those two colors on the color cube.
 Your color list and the associated gradients contribute significantly to the overall appearance of your artwork.
 
+<p align="center">
+  <img src="images/color-cube.JPG" alt="Color Cube" width="300">
+</p>
+
 **Note**: Selecting two adjacent colors on opposite sides of the color cube may lead to a gray transition in the gradient. You may wish to select colors that are not connected by a straight line through the center of the cube.
 
 ## Selecting Colors in MandArt
@@ -25,8 +29,6 @@ You can use the eye dropper to select colors from the color cube.
 
 Learn more about [Selecting Colors in MandArt](https://denisecase.github.io/MandArt-Docs/documentation/mandart/b2-color).
 
-![Color Cube](images/color-cube.JPG)
-
 ## Color Cube Links
 
 - [Color Cube App](https://denisecase.github.io/color-cube/)
@@ -38,4 +40,6 @@ Learn more about [Selecting Colors in MandArt](https://denisecase.github.io/Mand
 - [MandArt Documentation](https://denisecase.github.io/MandArt-Docs/documentation/mandart/)
 - [MandArt Discoveries](https://github.com/denisecase/MandArt-Discoveries/)
 
-![MandArt](images/MandArtColorList.webp)
+<p align="center">
+  <img src="mandart.png" alt="MandArt Screenshot" width="300">  
+</p>
