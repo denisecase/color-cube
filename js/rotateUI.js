@@ -27,7 +27,7 @@ rotationCheckbox.addEventListener('change', (event) => {
 rotationButtonLeft.addEventListener('click', (event) => {
   rotateSettings.doAnimateRotation = false;
   rotationCheckbox.checked = rotateSettings.doAnimateRotation;
-  const rotation = -60;
+  const rotation = -30;
   setUserRotation(rotation);
   animateOrRender();
 });
@@ -36,7 +36,7 @@ rotationButtonLeft.addEventListener('click', (event) => {
 rotationButtonRight.addEventListener('click', (event) => {
   rotateSettings.doAnimateRotation = false;
   rotationCheckbox.checked = rotateSettings.doAnimateRotation;
-  const rotation = 60;
+  const rotation = 30;
   setUserRotation(rotation);
   animateOrRender();
 });

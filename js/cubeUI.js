@@ -49,16 +49,16 @@ function onCubeCountChange() {
   cubeSettings.cubeCount = parseInt(this.value);
   createCubes();
   cameraSettings.initialize();
-  resizeCanvas(oldCubeCount, cubeSettings.cubeCount);
+ /* resizeCanvas(oldCubeCount, cubeSettings.cubeCount);*/
   animateOrRender(); // always
 }
-
+/*
 function resizeCanvas(oldCubeCount, newCubeCount) {
   const canvas = document.querySelector('canvas');
   const oldHeight = parseInt(canvas.style.height);
   const newHeight = oldHeight * (newCubeCount / oldCubeCount);
   canvas.style.height = `${newHeight}px`;
-}
+}*/
 
 // Add an event listener to each radio button
 cubeCountControls.forEach((radio) => {
