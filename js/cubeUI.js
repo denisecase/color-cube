@@ -45,10 +45,19 @@ const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
 
 // Event listener for RADIO BUTTON CHANGE
 function onCubeCountChange() {
+  const oldCubeCount = cubeSettings.cubeCount;
   cubeSettings.cubeCount = parseInt(this.value);
   createCubes();
   cameraSettings.initialize();
+  resizeCanvas(oldCubeCount, cubeSettings.cubeCount);
   animateOrRender(); // always
+}
+
+function resizeCanvas(oldCubeCount, newCubeCount) {
+  const canvas = document.querySelector('canvas');
+  const oldHeight = parseInt(canvas.style.height);
+  const newHeight = oldHeight * (newCubeCount / oldCubeCount);
+  canvas.style.height = `${newHeight}px`;
 }
 
 // Add an event listener to each radio button
@@ -127,41 +136,27 @@ function createCubes() {
 }
 
 /**
- * Aligns the cube group in the 3D scene.
- *
- * This function is responsible for rotating the cube group so that a specific part
- * of it (in this case, the white cube) is aligned towards a particular direction
- * (akin to pointing towards the 'north pole' in a geographical context).
+ * Aligns the cube group in the 3D scene by rotating it.
+ * This function rotates the cube group so that a specific part,
+ * like the white cube, is aligned in a particular direction.
  */
 function alignCubeGroup() {
-  // Defining the axis of rotation.
-  // The axis is a vector represented by three values: (x, y, z).
-  // The values here create a diagonal axis across the X and Y axes.
-  // 'normalize()' is called to ensure that the axis vector has a unit length of 1.
-  // This standardizes the rotation effect regardless of the axis length.
+  // Define a diagonal rotation axis across the X and Y axes and normalize it.
   let axis = new THREE.Vector3(1, 0, -1).normalize();
 
-  // Calculating the angle for rotation.
-  // 'Math.atan(Math.sqrt(2))' computes the angle needed to rotate the cube group
-  // so that the white cube aligns as intended.
-  // This specific calculation is based on the desired orientation of the cube group.
+  // Calculate the rotation angle to align the cube group as intended.
   let angle = -Math.atan(Math.sqrt(2));
-  // let angle = 5.3;
 
-  // Rotating the cube group around the specified axis by the calculated angle.
-  // This method rotates the entire group of cubes, changing their orientation in the 3D space.
-  // The rotation is applied relative to their current position.
+  // Rotate the cube group around the axis by the calculated angle.
   cubeGroup.rotateOnAxis(axis, angle);
 
+  // Define another rotation axis, vertical along the Y-axis.
   let rotationAxis = new THREE.Vector3(0, 1, 0).normalize();
 
-  // Calculating the rotation angle.
-  // The user input is assumed to be in degrees, so it's converted to radians.
-  // The conversion formula is: radians = (degrees * 2 * Math.PI) / 360.
+  // Define a fixed rotation angle to apply additional rotation.
   let rotationAngle = 0.27;
 
-  // Rotating the cube group around the specified axis by the calculated angle.
-  // This applies the user's desired rotation to the entire group of cubes.
+  // Apply the additional rotation around the vertical axis.
   cubeGroup.rotateOnWorldAxis(rotationAxis, rotationAngle);
 }
 

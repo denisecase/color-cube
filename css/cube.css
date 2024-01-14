@@ -30,9 +30,28 @@ header img {
   width: auto;
 }
 
+#info-icon {
+  position: absolute;
+  right: 10px; /* Distance from the right edge of the header */
+  top: 50%; /* Align vertically at the center of the header */
+  transform: translateY(-50%); /* Ensures perfect vertical centering */
+  color: #ddd; /* Icon color */
+  text-decoration: none; /* Removes underline from the link */
+  font-size: 1.5rem; /* Adjusts the size of the info icon */
+  padding: 5px; /* Optional padding around the icon */
+}
+
+/* Hover effect for the info icon */
+#info-icon:hover {
+  color: white; /*change color */
+  cursor: pointer; /* Changes the cursor to indicate clickable */
+  font-size: 2rem;
+  border: white 2px solid; /* Adds a border around the icon */
+}
+
 article {
   position: sticky;
-  top: 50px; /* Adjust this value based on the actual height of your header */
+  top: 50px; /* Use actual height of header */
   z-index: 5;
   background-color: #555;
   padding: 5px;
@@ -51,7 +70,6 @@ article {
   justify-content: center;
   align-items: center;
   overflow: auto;
- /* height: 800px; *//* per ChatGPT */
 }
 
 footer {
@@ -114,5 +132,9 @@ input[type='checkbox'] {
   .rotation-control,
   .animation-controls {
     flex-direction: column;
+  }
+  #info-icon {
+    right: 5px; 
+    font-size: 20px; 
   }
 }
