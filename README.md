@@ -40,6 +40,4 @@ Learn more about [Selecting Colors in MandArt](https://denisecase.github.io/Mand
 - [MandArt Documentation](https://denisecase.github.io/MandArt-Docs/documentation/mandart/)
 - [MandArt Discoveries](https://github.com/denisecase/MandArt-Discoveries/)
 
-<p align="center">
-  <img src="mandart.png" alt="MandArt Screenshot" width="300">  
-</p>
+![MandArt Color List](images/MandArt-ColorList.png)
