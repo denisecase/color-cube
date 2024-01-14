@@ -16,7 +16,6 @@ export function init() {
   setupCamera();
   setupRenderer();
   animateOrRender();
-  //handleResize(); // Handles browser window resizing & maintain aspect ratio
 }
 
 /**
@@ -24,7 +23,7 @@ export function init() {
  */
 function setupScene() {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
+  scene.background = new THREE.Color(0xf4f4f4);
 }
 
 /**

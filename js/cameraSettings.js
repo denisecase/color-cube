@@ -1,4 +1,4 @@
-// cameraSettings.js - a class
+// cameraSettings.js
 
 import { cubeSettings } from './cubeUI.js';
 
@@ -12,14 +12,12 @@ class CameraSettings {
     this.far = 100;
 
     this.camera_x = 0;
-    this.camera_y = 0; // This will be set dynamically
+    this.camera_y = 0; // set dynamically
     this.camera_z = -25;
 
     this.camera_look_x = 0;
-    this.camera_look_y = 0; // This will be set dynamically
+    this.camera_look_y = 0; // set dynamically
     this.camera_look_z = 0;
-
-   // console.log('y calc:', y);
   }
 
   get calculated_camera_y_value() {
@@ -42,17 +40,13 @@ class CameraSettings {
   }
 
   initialize() {
-   // this.camera_y = this.calculated_camera_y_value;
-   // this.camera_look_y = this.calculated_camera_y_value;
-
-   const y = this.calculated_camera_y_value; // Get the calculated value
-   this.camera_y = y;
+    const y = this.calculated_camera_y_value; // Get the calculated value
+    this.camera_y = y;
     this.camera_look_y = y;
-     console.log('y calc:', y);
-     console.log('this.camera_y', this.camera_y);
-     console.log('this.camera_look_y', this.camera_look_y);
+    console.log('y calc:', y);
+    console.log('this.camera_y', this.camera_y);
+    console.log('this.camera_look_y', this.camera_look_y);
   }
 }
 
 export const cameraSettings = new CameraSettings();
-
