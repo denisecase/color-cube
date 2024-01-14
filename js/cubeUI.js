@@ -38,7 +38,7 @@ export const cubeSettings = {
   size: 1,
   cubeCount: 9,
   colorList: [0, 32, 64, 96, 128, 160, 192, 224, 255],
-  initialGap: 0.2,
+  initialGap: 0.5,
 };
 
 const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
