@@ -25,6 +25,10 @@
      git push
 */
 
+/*
+console.log('numCubes', numCubes);
+*/
+
 /**
  * This file contains the functions for setting up the main cube group in the 3D scene.
  */
@@ -45,7 +49,7 @@ const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
 
 // Event listener for RADIO BUTTON CHANGE
 function onCubeCountChange() {
-  const oldCubeCount = cubeSettings.cubeCount;
+ // const oldCubeCount = cubeSettings.cubeCount;
   cubeSettings.cubeCount = parseInt(this.value);
   createCubes();
   cameraSettings.initialize();
