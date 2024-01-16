@@ -4,10 +4,10 @@ import { cubeSettings } from './cubeUI.js';
 
 class CameraSettings {
   constructor() {
-    this.left = -16;
-    this.right = 16;
-    this.top = 16;
-    this.bottom = -16;
+    this.left = -17;
+    this.right = 17;
+    this.top = 17;
+    this.bottom = -17;
     this.near = 0;
     this.far = 100;
 
@@ -22,19 +22,19 @@ class CameraSettings {
 
   get calculated_camera_y_value() {
     const numCubes = cubeSettings.cubeCount;
-    console.log('numCubes', numCubes);
+   // console.log('numCubes', numCubes);
 
     const width = cubeSettings.size;
-    console.log('cubeSettings.size', cubeSettings.size);
+   // console.log('cubeSettings.size', cubeSettings.size);
 
     const numGaps = numCubes - 1;
-    console.log('numGaps', numGaps);
+   // console.log('numGaps', numGaps);
 
     const gap = cubeSettings.initialGap;
-    console.log('gap', gap);
+   // console.log('gap', gap);
 
-    const y = ((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
-    console.log('y calc:', y);
+    const y = 0*((numCubes * width + numGaps * gap) * Math.sqrt(3)) / 2;
+   // console.log('y calc:', y);
 
     return y;
   }
@@ -43,9 +43,9 @@ class CameraSettings {
     const y = this.calculated_camera_y_value; // Get the calculated value
     this.camera_y = y;
     this.camera_look_y = y;
-    console.log('y calc:', y);
-    console.log('this.camera_y', this.camera_y);
-    console.log('this.camera_look_y', this.camera_look_y);
+   // console.log('y calc:', y);
+   // console.log('this.camera_y', this.camera_y);
+   // console.log('this.camera_look_y', this.camera_look_y);
   }
 }
 

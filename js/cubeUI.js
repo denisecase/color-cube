@@ -51,6 +51,7 @@ const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
 function onCubeCountChange() {
  // const oldCubeCount = cubeSettings.cubeCount;
   cubeSettings.cubeCount = parseInt(this.value);
+  console.log('cubeSettings.cubeCount', cubeSettings.cubeCount);
   createCubes();
   cameraSettings.initialize();
  /* resizeCanvas(oldCubeCount, cubeSettings.cubeCount);*/
@@ -90,8 +91,10 @@ function setupCubeGroup() {
 }
 
 function getColorListFromCubeCount(count) {
+  console.log('count', count);
   const fullList = cubeSettings.colorList;
   const removeCount = (fullList.length - count) / 2;
+  console.log('removeCount', removeCount);
   if (removeCount <= 0) {
     return fullList;
   }
@@ -120,18 +123,32 @@ function createCubes() {
 
   const colorListForNCubes = getColorListFromCubeCount(cubeSettings.cubeCount);
   const blocks = colorListForNCubes;
+  console.log('blocks', blocks);
+  console.log('blocks.length', blocks.length);
   const geometry = new THREE.BoxGeometry(
     cubeSettings.size,
     cubeSettings.size,
     cubeSettings.size,
   );
 
-  for (let x = 0; x < blocks.length; x++) {
+ /* for (let x = 0; x < blocks.length; x++) {
     for (let y = 0; y < blocks.length; y++) {
       for (let z = 0; z < blocks.length; z++) {
         const r = blocks[x];
         const g = blocks[y];
         const b = blocks[z];
+        const color = new THREE.Color(`rgb(${r}, ${g}, ${b})`);
+        createCube(x, y, z, color, geometry);
+      }
+    }
+  }*/
+
+  for (let x = -(blocks.length - 1)/2; x <=(blocks.length - 1)/2; x++) {
+    for (let y = -(blocks.length - 1)/2; y <= (blocks.length - 1)/2; y++) {
+      for (let z = -(blocks.length - 1)/2; z <= (blocks.length - 1)/2; z++) {
+        const r = blocks[x + (blocks.length - 1)/2];
+        const g = blocks[y + (blocks.length - 1)/2];
+        const b = blocks[z + (blocks.length - 1)/2];
         const color = new THREE.Color(`rgb(${r}, ${g}, ${b})`);
         createCube(x, y, z, color, geometry);
       }
