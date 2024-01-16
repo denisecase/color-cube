@@ -30,7 +30,7 @@ function setupScene() {
  * Sets up the camera for the 3D scene.
  */
 function setupCamera() {
-  cameraSettings.initialize();
+ // cameraSettings.initialize();
 
   camera = new THREE.OrthographicCamera(
     cameraSettings.left,

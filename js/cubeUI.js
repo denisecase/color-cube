@@ -51,9 +51,9 @@ const cubeCountControls = document.querySelectorAll('input[name="cubeCount"]');
 function onCubeCountChange() {
  // const oldCubeCount = cubeSettings.cubeCount;
   cubeSettings.cubeCount = parseInt(this.value);
-  console.log('cubeSettings.cubeCount', cubeSettings.cubeCount);
+ // console.log('cubeSettings.cubeCount', cubeSettings.cubeCount);
   createCubes();
-  cameraSettings.initialize();
+ // cameraSettings.initialize();
  /* resizeCanvas(oldCubeCount, cubeSettings.cubeCount);*/
   animateOrRender(); // always
 }
@@ -91,10 +91,10 @@ function setupCubeGroup() {
 }
 
 function getColorListFromCubeCount(count) {
-  console.log('count', count);
+ // console.log('count', count);
   const fullList = cubeSettings.colorList;
   const removeCount = (fullList.length - count) / 2;
-  console.log('removeCount', removeCount);
+ // console.log('removeCount', removeCount);
   if (removeCount <= 0) {
     return fullList;
   }
@@ -123,8 +123,8 @@ function createCubes() {
 
   const colorListForNCubes = getColorListFromCubeCount(cubeSettings.cubeCount);
   const blocks = colorListForNCubes;
-  console.log('blocks', blocks);
-  console.log('blocks.length', blocks.length);
+ // console.log('blocks', blocks);
+ // console.log('blocks.length', blocks.length);
   const geometry = new THREE.BoxGeometry(
     cubeSettings.size,
     cubeSettings.size,
